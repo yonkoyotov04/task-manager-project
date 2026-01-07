@@ -1,6 +1,7 @@
 import User from '../models/User.js'
 import bcrypt from 'bcrypt'
 import {generateAuthToken} from '../utils/tokenUtils.js'
+import { use } from 'react';
 
 export default {
     async register(userData) {
@@ -20,6 +21,29 @@ export default {
         }
 
         const user = await User.create(userData);
+        const token = generateAuthToken(user);
+
+        return {
+            _id: user.id,
+            email: user.email,
+            username: user.username,
+            accessToken: token
+        }
+    },
+
+    async login(email, password) {
+        const user = await User.findOne({email});
+
+        if (!user) {
+            throw new Error('Email or Password is invaild!');
+        }
+
+        const passwordIsValid = await bcrypt.compare(password, user.password);
+
+        if (!passwordIsValid) {
+            throw new Error('Email or Password is invaild!');
+        }
+
         const token = generateAuthToken(user);
 
         return {
