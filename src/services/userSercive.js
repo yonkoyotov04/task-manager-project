@@ -1,7 +1,6 @@
 import User from '../models/User.js'
 import bcrypt from 'bcrypt'
 import {generateAuthToken} from '../utils/tokenUtils.js'
-import { use } from 'react';
 
 export default {
     async register(userData) {
@@ -52,5 +51,9 @@ export default {
             username: user.username,
             accessToken: token
         }
+    },
+
+    getUserData(userId) {
+        return User.findById(userId).select({username: true, email: true});
     }
 }

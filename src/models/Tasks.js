@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 const taskSchema = new Schema({
     title: {
@@ -9,13 +9,12 @@ const taskSchema = new Schema({
     deadline: {
         type: String,
         required: false,
+    },
+    user: {
+        type: Types.ObjectId,
+        ref: 'User'
     }
 })
 
-const CompletedTask = model("CompletedTask", taskSchema);
-const ActiveTask = model('ActiveTask', taskSchema);
-
-export default {
-    CompletedTask,
-    ActiveTask
-};
+export const CompletedTask = model("CompletedTask", taskSchema);
+export const ActiveTask = model('ActiveTask', taskSchema);
