@@ -15,3 +15,5 @@ quoteController.post('/', isAuth, async (req, res) => {
 
     await quoteService.createQuote(quoteText);
 })
+
+export default quoteController;
