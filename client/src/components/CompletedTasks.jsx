@@ -3,10 +3,10 @@ import CompletedTaskCard from "./CompletedTaskCard.jsx";
 export default function CompletedTasks() {
 
     return (
-        <section class="task-column">
-            <div class="column-header">
+        <section className="task-column">
+            <div className="column-header">
                 <h2>Completed Tasks</h2>
-                <button class="icon-btn">🗑</button>
+                <button className="icon-btn">🗑</button>
             </div>
 
             <CompletedTaskCard />

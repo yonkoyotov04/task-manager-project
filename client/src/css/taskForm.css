@@ -1,0 +1,93 @@
+/* Overlay background */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 182, 193, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Modal card */
+.modal {
+    position: fixed;
+    background: #fff0f7;
+    padding: 25px;
+    width: 320px;
+    border-radius: 22px;
+    box-shadow: 0 20px 40px rgba(255, 105, 180, 0.35);
+    text-align: center;
+    animation: popIn 0.25s ease;
+}
+
+.modal h2 {
+    margin-bottom: 5px;
+}
+
+.modal .subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.modal input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid #ffd1e8;
+    font-size: 14px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.modal input:focus {
+    border-color: #ff69b4;
+    outline: none;
+}
+
+/* Buttons */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cancel-btn {
+    flex: 1;
+    background: transparent;
+    border: 2px solid #ffb6d9;
+    color: #ff69b4;
+    border-radius: 999px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.save-btn {
+    flex: 1;
+    background: #ff69b4;
+    border: none;
+    color: white;
+    border-radius: 999px;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background: #ff4fa3;
+}
+
+/* Animation */
+@keyframes popIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

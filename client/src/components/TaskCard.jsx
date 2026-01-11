@@ -1,12 +1,12 @@
 export default function TaskCard() {
 
     return (
-        <div class="task-card">
-            <div class="task-info">
-                <span class="name">Text my baby</span>
-                <span class="deadline">Due: Today</span>
+        <div className="task-card">
+            <div className="task-info">
+                <span className="name">Text my baby</span>
+                <span className="deadline">Due: Today</span>
             </div>
-            <div class="task-actions">
+            <div className="task-actions">
                 <button>✔</button>
                 <button>✏</button>
                 <button>🗑</button>
