@@ -21,7 +21,7 @@ userController.post('/login', isGuest, async (req, res) => {
     const {email, password} = req.body;
 
     try {
-        const token = userSercive.login(email, password);
+        const token = await userSercive.login(email, password);
         res.status(201).json(token);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
