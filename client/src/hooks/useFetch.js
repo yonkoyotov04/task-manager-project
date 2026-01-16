@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 const baseURL = 'http://localhost:2406'
 
-export default function useFetch(url, setData) {
+export default function useFetch(url, setData, refreshData) {
     const {isAuthenticated, user, logoutHandler} = useContext(UserContext);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +61,7 @@ export default function useFetch(url, setData) {
         } catch (error) {
             throw error.message;
         }
-    }, [url, refresh])
+    }, [url, refresh, refreshData])
 
     return {
         fetcher, isLoading, refresher

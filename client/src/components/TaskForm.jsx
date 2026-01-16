@@ -1,20 +1,47 @@
-export default function TaskForm() {
+import { useContext, useState } from "react";
+import useFetch from "../hooks/useFetch.js";
+import UserContext from "../contexts/userContext.jsx";
+import useControlledForm from "../hooks/useControlledForm.js";
+
+export default function TaskForm({formSetter}) {
+    const {user} = useContext(UserContext);
+    const {fetcher} = useFetch();
+
+    const data = {
+        title: '',
+        deadline: ''
+    }
+
+    const [initialValues, setInitialValues] = useState(data);
+
+    const closeTaskForm = () => {
+        formSetter(false);
+    }
+    
+    const onSubmit = async (values) => {
+        const formData = values;
+
+        await fetcher('/tasks/active', "POST", formData, {accessToken: user?.accessToken});
+        formSetter(false);
+    }
+
+    const {values, changeHandler, submitHandler} = useControlledForm(initialValues, onSubmit);
 
     return (
-        <div class="modal-overlay" id="taskModal">
-            <div class="modal">
+        <div className="modal-overlay" id="taskModal">
+            <div className="modal">
                 <h2>Add New Task</h2>
-                <p class="subtitle">Make today a little more organized 💕</p>
+                <p className="subtitle">Make today a little more organized 💕</p>
 
-                <form>
-                    <input type="text" placeholder="Task name" required />
-                    <input type="date" required />
+                <form method="POST" onSubmit={submitHandler}>
+                    <input type="text" name="title" placeholder="Task name" onChange={changeHandler} value={values.title} required />
+                    <input type="date" name="deadline" onChange={changeHandler} value={values.deadline} required />
 
-                    <div class="modal-actions">
-                        <button type="button" class="cancel-btn" onclick="closeModal()">
+                    <div className="modal-actions">
+                        <button type="button" className="cancel-btn" onClick={closeTaskForm}>
                             Cancel
                         </button>
-                        <button type="submit" class="save-btn">
+                        <button type="submit" className="save-btn">
                             Add Task
                         </button>
                     </div>

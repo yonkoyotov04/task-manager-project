@@ -1,10 +1,10 @@
-export default function TaskCard() {
+export default function TaskCard({title, deadline}) {
 
     return (
         <div className="task-card">
             <div className="task-info">
-                <span className="name">Text my baby</span>
-                <span className="deadline">Due: Today</span>
+                <span className="name">{title}</span>
+                <span className="deadline">Due: {deadline}</span>
             </div>
             <div className="task-actions">
                 <button>✔</button>

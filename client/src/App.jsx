@@ -11,8 +11,6 @@ function App() {
     const [count, setCount] = useState(0)
     const { user } = useContext(UserContext);
 
-    console.log(user);
-
     return (
         <>
             <Routes>
