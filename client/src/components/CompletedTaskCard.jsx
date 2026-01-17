@@ -1,9 +1,9 @@
-export default function CompletedTaskCard() {
+export default function CompletedTaskCard({title}) {
 
     return (
         <div className="task-card">
             <div className="task-info">
-                <span className="name">Plan date night</span>
+                <span className="name">{title}</span>
                 <span className="deadline">Completed</span>
             </div>
             <div className="task-actions">

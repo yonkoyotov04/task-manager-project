@@ -25,6 +25,7 @@ taskController.post('/active', isAuth, async (req, res) => {
 
     try {
         const taskData = { user: userId, ...formData };
+        console.log(taskData);
         const task = await taskService.createActiveTask(taskData);
         res.json(task ?? []);
     } catch (error) {

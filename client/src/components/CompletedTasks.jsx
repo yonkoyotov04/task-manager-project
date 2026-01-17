@@ -1,6 +1,12 @@
+import { useState } from "react";
+import useFetch from "../hooks/useFetch.js";
 import CompletedTaskCard from "./CompletedTaskCard.jsx";
 
 export default function CompletedTasks() {
+
+    const [completedTasks, setCompletedTasks] = useState([]);
+
+    useFetch('/tasks/completed', setCompletedTasks, completedTasks);
 
     return (
         <section className="task-column">
@@ -9,7 +15,7 @@ export default function CompletedTasks() {
                 <button className="icon-btn">🗑</button>
             </div>
 
-            <CompletedTaskCard />
+            {completedTasks.map(task => <CompletedTaskCard key={task._id} {...task} />)}
         </section>
     )
 }

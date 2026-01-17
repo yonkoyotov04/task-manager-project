@@ -24,7 +24,7 @@ export default {
 
     async completeTask(taskId) {
         const taskData = await ActiveTask.findById(taskId);
-        await CompletedTask.create(taskData);
+        await CompletedTask.create(taskData.toObject());
         await ActiveTask.findByIdAndDelete(taskId);
     },
 
@@ -38,7 +38,7 @@ export default {
 
     async returnToActiveTasks(taskId) {
         const taskData = await CompletedTask.findById(taskId);
-        await ActiveTask.create(taskData);
+        await ActiveTask.create(taskData.toObject());
         await CompletedTask.findByIdAndDelete(taskId);
     }
 }

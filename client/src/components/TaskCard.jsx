@@ -1,4 +1,15 @@
-export default function TaskCard({title, deadline}) {
+import { useContext } from "react";
+import useFetch from "../hooks/useFetch.js"
+import UserContext from "../contexts/userContext.jsx";
+
+export default function TaskCard({_id, title, deadline}) {
+
+    const {fetcher} = useFetch();
+    const {user} = useContext(UserContext);
+
+    const completeTask = () => {
+        fetcher(`/tasks/active/${_id}/complete`, "GET", null, {accessToken: user?.accessToken});
+    }
 
     return (
         <div className="task-card">
@@ -7,7 +18,7 @@ export default function TaskCard({title, deadline}) {
                 <span className="deadline">Due: {deadline}</span>
             </div>
             <div className="task-actions">
-                <button>✔</button>
+                <button onClick={completeTask}>✔</button>
                 <button>✏</button>
                 <button>🗑</button>
             </div>
