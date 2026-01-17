@@ -10,11 +10,19 @@ const taskSchema = new Schema({
         type: String,
         required: false,
     },
+    status: {
+        type: String,
+        required: true,
+        enum: ['active', 'completed'],
+        default: 'active'
+    },
+    completedAt: {
+        type: Date
+    },
     user: {
         type: Types.ObjectId,
         ref: 'User'
     }
 })
 
-export const CompletedTask = model("CompletedTask", taskSchema);
-export const ActiveTask = model('ActiveTask', taskSchema);
+export const Task = model("Task", taskSchema);

@@ -26,7 +26,7 @@ taskController.post('/active', isAuth, async (req, res) => {
     try {
         const taskData = { user: userId, ...formData };
         console.log(taskData);
-        const task = await taskService.createActiveTask(taskData);
+        const task = await taskService.createTask(taskData);
         res.json(task ?? []);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
@@ -34,7 +34,7 @@ taskController.post('/active', isAuth, async (req, res) => {
     }
 })
 
-taskController.get('/active/:taskId/complete', isAuth, async (req, res) => {
+taskController.put('/active/:taskId/complete', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 
     try {
@@ -52,7 +52,7 @@ taskController.put('/active/:taskId', isAuth, async (req, res) => {
 
     try {
         const newTask = { user: userId, newData };
-        await taskService.editActiveTask(taskId, newTask);
+        await taskService.editTask(taskId, newTask);
         res.json({});
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
@@ -64,18 +64,18 @@ taskController.delete('/active/:taskId', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 
     try {
-        await taskService.deleteActiveTask(taskId);
+        await taskService.deleteTask(taskId);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
         res.status(400).end();
     }
 })
 
-taskController.get('/completed/:taskId/back', isAuth, async (req, res) => {
+taskController.put('/completed/:taskId/back', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 
     try {
-        await taskService.returnToActiveTasks(taskId);
+        await taskService.returnTask(taskId);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
         res.status(400).end();
@@ -86,7 +86,7 @@ taskController.delete('/completed/:taskId', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 
     try {
-        await taskService.deleteCompletedTask(taskId);
+        await taskService.deleteTask(taskId);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
         res.status(400).end();

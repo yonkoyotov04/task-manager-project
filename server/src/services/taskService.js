@@ -1,44 +1,35 @@
-import { ActiveTask } from '../models/Tasks.js';
-import { CompletedTask } from '../models/Tasks.js';
+import { Task } from '../models/Tasks.js';
 
 export default {
     getAllActiveTasks(userId) {
-        return ActiveTask.find({user: userId});
+        return Task.find({ user: userId, status: 'active' });
     },
 
     getAllCompletedTasks(userId) {
-        return CompletedTask.find({user: userId})
+        return Task.find({ user: userId, status: 'completed' });
     },
 
-    createActiveTask(taskData) {
-        return ActiveTask.create(taskData);
+    createTask(taskData) {
+        return Task.create(taskData);
     },
 
-    editActiveTask(taskId, newData) {
-        return ActiveTask.findByIdAndUpdate(taskId, newData, {runValidators: true})
+    editTask(taskId, newData) {
+        return Task.findByIdAndUpdate(taskId, newData, { runValidators: true })
     },
 
-    deleteActiveTask(taskId) {
-        return ActiveTask.findByIdAndDelete(taskId);
+    deleteTask(taskId) {
+        return Task.findByIdAndDelete(taskId);
     },
 
-    async completeTask(taskId) {
-        const taskData = await ActiveTask.findById(taskId);
-        await CompletedTask.create(taskData.toObject());
-        await ActiveTask.findByIdAndDelete(taskId);
-    },
-
-    deleteCompletedTask(taskId) {
-        return CompletedTask.findByIdAndDelete(taskId);
+    completeTask(taskId) {
+        return Task.findByIdAndUpdate(taskId, { status: 'completed', completedAt: new Date() }, { runValidators: true, new: true });
     },
 
     deleteAllCompletedTasks(userId) {
-        return CompletedTask.deleteMany({user: userId});
+        return Task.deleteMany({ user: userId, status: 'completed' });
     },
 
-    async returnToActiveTasks(taskId) {
-        const taskData = await CompletedTask.findById(taskId);
-        await ActiveTask.create(taskData.toObject());
-        await CompletedTask.findByIdAndDelete(taskId);
+    returnTask(taskId) {
+        return Task.findByIdAndUpdate(taskId, { status: 'active', completedAt: null }, { runValidators: true, new: true });
     }
 }

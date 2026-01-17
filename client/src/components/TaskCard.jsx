@@ -4,11 +4,11 @@ import UserContext from "../contexts/userContext.jsx";
 
 export default function TaskCard({_id, title, deadline}) {
 
-    const {fetcher} = useFetch();
+    const {fetcher, isLoading} = useFetch();
     const {user} = useContext(UserContext);
 
     const completeTask = () => {
-        fetcher(`/tasks/active/${_id}/complete`, "GET", null, {accessToken: user?.accessToken});
+        fetcher(`/tasks/active/${_id}/complete`, "PUT", null, {accessToken: user?.accessToken});
     }
 
     return (
@@ -18,7 +18,7 @@ export default function TaskCard({_id, title, deadline}) {
                 <span className="deadline">Due: {deadline}</span>
             </div>
             <div className="task-actions">
-                <button onClick={completeTask}>✔</button>
+                <button disabled={isLoading} onClick={completeTask}>✔</button>
                 <button>✏</button>
                 <button>🗑</button>
             </div>

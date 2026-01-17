@@ -7,7 +7,7 @@ const baseURL = 'http://localhost:2406'
 export default function useFetch(url, setData, refreshData) {
     const {isAuthenticated, user, logoutHandler} = useContext(UserContext);
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [refresh, setRefresh] = useState(false);
 
     const refresher = () => {
@@ -54,13 +54,12 @@ export default function useFetch(url, setData, refreshData) {
             return
         }
 
-        try {
+        setIsLoading(true);
+
             fetcher(url)
             .then(result => setData(result))
-            .finally(setIsLoading(false))
-        } catch (error) {
-            throw error.message;
-        }
+            .catch(error => console.error(error))
+            .finally(() => setIsLoading(false))
     }, [url, refresh, refreshData])
 
     return {
