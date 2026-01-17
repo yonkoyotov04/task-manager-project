@@ -2,12 +2,12 @@ import { ActiveTask } from '../models/Tasks.js';
 import { CompletedTask } from '../models/Tasks.js';
 
 export default {
-    getAllActiveTasks() {
-        return ActiveTask.find();
+    getAllActiveTasks(userId) {
+        return ActiveTask.find({user: userId});
     },
 
-    getAllCompletedTasks() {
-        return CompletedTask.find()
+    getAllCompletedTasks(userId) {
+        return CompletedTask.find({user: userId})
     },
 
     createActiveTask(taskData) {

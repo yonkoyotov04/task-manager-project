@@ -9,7 +9,7 @@ export default function Header() {
         <header>
             <div className="quote"></div>
             <div className="user">
-                <span>{user?.email}</span>
+                <span>{user?.username}</span>
                 <button onClick={logoutHandler}>Logout</button>
             </div>
         </header>

@@ -6,13 +6,15 @@ import { getErrorMessage } from "../utils/errorUtils.js";
 const taskController = Router();
 
 taskController.get('/active', isAuth, async (req, res) => {
-    const activeTasks = await taskService.getAllActiveTasks();
+    const userId = req.user?.id;
+    const activeTasks = await taskService.getAllActiveTasks(userId);
 
     res.json(activeTasks ?? []);
 })
 
 taskController.get('/completed', isAuth, async (req, res) => {
-    const completedTasks = await taskService.getAllCompletedTasks();
+    const userId = req.user?.id;
+    const completedTasks = await taskService.getAllCompletedTasks(userId);
 
     res.json(completedTasks ?? []);
 })
