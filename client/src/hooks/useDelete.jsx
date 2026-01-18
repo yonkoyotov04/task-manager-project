@@ -24,7 +24,7 @@ export default function useDelete(type, id, data, setData) {
                 break;
             }
             case 'all': {
-                fetcher('/tasks/completed', "DELETE", null, {accessToken: user?.accessToken});
+                fetcher('/tasks', "DELETE", null, {accessToken: user?.accessToken});
                 setData(data => data.filter(item => item.status === 'active'));
                 setShowDeletePrompt(false);
                 break;
@@ -36,7 +36,7 @@ export default function useDelete(type, id, data, setData) {
         return (
             <div className="modal-overlay">
                 <div className="delete-modal">
-                    <h2>{type === 'sinlge' ? "Delete this task?" : "Delete all completed tasks?"}</h2>
+                    <h2>{id !== null ? "Delete this task?" : "Delete all completed tasks?"}</h2>
                     <p className="subtitle">
                         This action cannot be undone 💔
                     </p>

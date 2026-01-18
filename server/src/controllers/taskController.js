@@ -18,7 +18,6 @@ taskController.post('/active', isAuth, async (req, res) => {
 
     try {
         const taskData = { user: userId, ...formData };
-        console.log(taskData);
         const task = await taskService.createTask(taskData);
         res.json(task ?? []);
     } catch (error) {
@@ -77,7 +76,7 @@ taskController.delete('/:taskId', isAuth, async (req, res) => {
     }
 })
 
-taskController.delete('/completed', isAuth, async (req, res) => {
+taskController.delete('/', isAuth, async (req, res) => {
     const userId = req.user?.id;
 
     try {
