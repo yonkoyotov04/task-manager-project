@@ -2,10 +2,11 @@ import { useContext, useState } from "react";
 import TaskCard from "./TaskCard.jsx";
 import useFetch from "../hooks/useFetch.js";
 import UserContext from "../contexts/userContext.jsx";
+import useDelete from "../hooks/useDelete.jsx";
 
 export default function ActiveTasks({ formSetter, tasks, taskSetter }) {
 
-    const {fetcher, isLoading} = useFetch();
+    const {fetcher} = useFetch();
     const {user} = useContext(UserContext);
 
     const showTaskForm = () => {
@@ -26,7 +27,7 @@ export default function ActiveTasks({ formSetter, tasks, taskSetter }) {
                 <button className="icon-btn" onClick={showTaskForm}>＋</button>
             </div>
 
-            {activeTasks.map(task => <TaskCard key={task._id} completeFunc={completeTask} {...task} />)}
+            {activeTasks.map(task => <TaskCard key={task._id} completeFunc={completeTask} tasks={tasks} taskSetter={taskSetter} {...task} />)}
 
         </section>
     )

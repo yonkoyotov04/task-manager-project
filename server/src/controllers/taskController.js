@@ -54,17 +54,6 @@ taskController.put('/:taskId', isAuth, async (req, res) => {
     }
 })
 
-taskController.delete('/:taskId', isAuth, async (req, res) => {
-    const taskId = req.params.taskId;
-
-    try {
-        await taskService.deleteTask(taskId);
-    } catch (error) {
-        res.statusMessage = getErrorMessage(error);
-        res.status(400).end();
-    }
-})
-
 taskController.put('/:taskId/back', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 

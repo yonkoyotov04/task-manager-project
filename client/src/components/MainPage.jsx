@@ -8,6 +8,7 @@ import useFetch from '../hooks/useFetch.js';
 export default function MainPage() {
 
     const [taskFormActive, setTaskFormActive] = useState(false);
+
     const [tasks, setTasks] = useState([]);
     useFetch('/tasks', setTasks);
 
@@ -16,7 +17,6 @@ export default function MainPage() {
             <Header />
             <main className='container'>
                 {taskFormActive ? <TaskForm formSetter={setTaskFormActive} tasks={tasks} taskSetter={setTasks} /> : ''}
-
                 <ActiveTasks formSetter={setTaskFormActive} tasks={tasks} taskSetter={setTasks} />
                 <CompletedTasks tasks={tasks} taskSetter={setTasks} />
             </main>

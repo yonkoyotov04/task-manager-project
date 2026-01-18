@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import useFetch from "../hooks/useFetch.js"
 import UserContext from "../contexts/userContext.jsx";
+import useDelete from "../hooks/useDelete.jsx";
 
-export default function CompletedTaskCard({_id, title, completedAt, returnFunc}) {
+export default function CompletedTaskCard({_id, title, completedAt, returnFunc, tasks, taskSetter}) {
+
+    const {DeletePrompt, onDeleteClick} = useDelete('single', _id, tasks, taskSetter)
 
     return (
         <div className="task-card">
@@ -12,8 +15,9 @@ export default function CompletedTaskCard({_id, title, completedAt, returnFunc})
             </div>
             <div className="task-actions">
                 <button onClick={() => {returnFunc(_id)}}>↩</button>
-                <button>🗑</button>
+                <button onClick={onDeleteClick}>🗑</button>
             </div>
+            {DeletePrompt}
         </div>
     )
 }
