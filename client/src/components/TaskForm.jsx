@@ -3,7 +3,7 @@ import useFetch from "../hooks/useFetch.js";
 import UserContext from "../contexts/userContext.jsx";
 import useControlledForm from "../hooks/useControlledForm.js";
 
-export default function TaskForm({formSetter}) {
+export default function TaskForm({formSetter, tasks, taskSetter}) {
     const {user} = useContext(UserContext);
     const {fetcher} = useFetch();
 
@@ -21,7 +21,8 @@ export default function TaskForm({formSetter}) {
     const onSubmit = async (values) => {
         const formData = values;
 
-        await fetcher('/tasks/active', "POST", formData, {accessToken: user?.accessToken});
+        const newTask = await fetcher('/tasks/active', "POST", formData, {accessToken: user?.accessToken});
+        taskSetter(tasks => [...tasks, newTask]);
         formSetter(false);
     }
 

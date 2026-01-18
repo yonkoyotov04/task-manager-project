@@ -60,7 +60,7 @@ export default function useFetch(url, setData, refreshData) {
             .then(result => setData(result))
             .catch(error => console.error(error))
             .finally(() => setIsLoading(false))
-    }, [url, refresh, refreshData])
+    }, [url, refresh])
 
     return {
         fetcher, isLoading, refresher

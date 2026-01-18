@@ -5,18 +5,11 @@ import { getErrorMessage } from "../utils/errorUtils.js";
 
 const taskController = Router();
 
-taskController.get('/active', isAuth, async (req, res) => {
+taskController.get('/', isAuth, async (req, res) => {
     const userId = req.user?.id;
-    const activeTasks = await taskService.getAllActiveTasks(userId);
+    const activeTasks = await taskService.getAllTasks(userId);
 
     res.json(activeTasks ?? []);
-})
-
-taskController.get('/completed', isAuth, async (req, res) => {
-    const userId = req.user?.id;
-    const completedTasks = await taskService.getAllCompletedTasks(userId);
-
-    res.json(completedTasks ?? []);
 })
 
 taskController.post('/active', isAuth, async (req, res) => {
@@ -34,18 +27,19 @@ taskController.post('/active', isAuth, async (req, res) => {
     }
 })
 
-taskController.put('/active/:taskId/complete', isAuth, async (req, res) => {
+taskController.put('/:taskId/complete', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 
     try {
-        await taskService.completeTask(taskId);
+        const updatedTask = await taskService.completeTask(taskId);
+        res.json(updatedTask ?? []);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
         res.status(400).end();
     }
 })
 
-taskController.put('/active/:taskId', isAuth, async (req, res) => {
+taskController.put('/:taskId', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
     const userId = req.user?.id;
     const newData = req.body;
@@ -60,7 +54,7 @@ taskController.put('/active/:taskId', isAuth, async (req, res) => {
     }
 })
 
-taskController.delete('/active/:taskId', isAuth, async (req, res) => {
+taskController.delete('/:taskId', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 
     try {
@@ -71,18 +65,19 @@ taskController.delete('/active/:taskId', isAuth, async (req, res) => {
     }
 })
 
-taskController.put('/completed/:taskId/back', isAuth, async (req, res) => {
+taskController.put('/:taskId/back', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 
     try {
-        await taskService.returnTask(taskId);
+        const updatedTask = await taskService.returnTask(taskId);
+        res.json(updatedTask ?? []);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
         res.status(400).end();
     }
 })
 
-taskController.delete('/completed/:taskId', isAuth, async (req, res) => {
+taskController.delete('/:taskId', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
 
     try {

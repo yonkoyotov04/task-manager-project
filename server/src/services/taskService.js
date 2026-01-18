@@ -1,12 +1,8 @@
 import { Task } from '../models/Tasks.js';
 
 export default {
-    getAllActiveTasks(userId) {
-        return Task.find({ user: userId, status: 'active' });
-    },
-
-    getAllCompletedTasks(userId) {
-        return Task.find({ user: userId, status: 'completed' });
+    getAllTasks(userId) {
+        return Task.find({ user: userId });
     },
 
     createTask(taskData) {
@@ -22,7 +18,15 @@ export default {
     },
 
     completeTask(taskId) {
-        return Task.findByIdAndUpdate(taskId, { status: 'completed', completedAt: new Date() }, { runValidators: true, new: true });
+        const date = new Date();
+        const shortDate = date.toLocaleString("en-GB", {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        })
+        return Task.findByIdAndUpdate(taskId, { status: 'completed', completedAt: shortDate }, { runValidators: true, new: true });
     },
 
     deleteAllCompletedTasks(userId) {

@@ -29,8 +29,8 @@ userController.post('/login', isGuest, async (req, res) => {
     }
 })
 
-userController.get('/:userId', isAuth, async (req, res) => {
-    const userId = req.params.userId;
+userController.get('/', isAuth, async (req, res) => {
+    const userId = req.user?.id;
     const profileData = await userSercive.getUserData(userId);
 
     res.status(201).json(profileData);

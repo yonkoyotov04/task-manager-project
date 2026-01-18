@@ -4,6 +4,7 @@
     border-radius: 24px;
     padding: 20px;
     box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+    user-select: none;
 }
 
 .column-header {

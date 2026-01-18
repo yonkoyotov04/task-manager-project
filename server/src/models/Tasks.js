@@ -17,7 +17,7 @@ const taskSchema = new Schema({
         default: 'active'
     },
     completedAt: {
-        type: Date
+        type: String
     },
     user: {
         type: Types.ObjectId,
