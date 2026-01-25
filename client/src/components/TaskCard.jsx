@@ -5,7 +5,7 @@ import useDelete from "../hooks/useDelete.jsx";
 
 export default function TaskCard({_id, title, deadline, completeFunc, tasks, taskSetter}) {
 
-    const {DeletePrompt, onDeleteClick} = useDelete('single', _id, tasks, taskSetter)
+    const {DeletePrompt, onDeleteClick} = useDelete('single', _id, tasks, taskSetter);
 
     return (
         <div className="task-card">

@@ -11,7 +11,8 @@ header {
 
 header .quote {
     font-style: italic;
-    font-weight: 300;
+    font-weight: 700;
+    transition: opacity 1.5s ease-in-out;
 }
 
 header .user {

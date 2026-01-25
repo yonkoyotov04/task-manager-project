@@ -5,7 +5,8 @@ import quoteService from "../services/quoteService.js";
 const quoteController = Router();
 
 quoteController.get('/', isAuth, async (req, res) => {
-    const randomQuote = quoteService.getRandomQuote();
+    const result = await quoteService.getRandomQuote();
+    const randomQuote = result[0].text;
 
     res.json(randomQuote ?? []);
 })
