@@ -23,7 +23,7 @@ export default function Header() {
                     setVisible(false);
                 }, 10000)
             }
-        }, 5000)
+        }, 120000)
 
         return () => clearInterval(interval);
     }, [])
