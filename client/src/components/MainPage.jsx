@@ -4,10 +4,12 @@ import CompletedTasks from './CompletedTasks.jsx'
 import { useState } from 'react'
 import TaskForm from './TaskForm.jsx';
 import useFetch from '../hooks/useFetch.js';
+import EditForm from './EditForm.jsx';
 
 export default function MainPage() {
 
     const [taskFormActive, setTaskFormActive] = useState(false);
+    const [editedTask, setEditedTask] = useState(null);
 
     const [tasks, setTasks] = useState([]);
     useFetch('/tasks', setTasks);
@@ -17,7 +19,8 @@ export default function MainPage() {
             <Header />
             <main className='container'>
                 {taskFormActive ? <TaskForm formSetter={setTaskFormActive} tasks={tasks} taskSetter={setTasks} /> : ''}
-                <ActiveTasks formSetter={setTaskFormActive} tasks={tasks} taskSetter={setTasks} />
+                {editedTask !== null ? <EditForm task={editedTask} onEdit={setEditedTask} taskSetter={setTasks}/> : ''}
+                <ActiveTasks formSetter={setTaskFormActive} onEdit={setEditedTask} tasks={tasks} taskSetter={setTasks} />
                 <CompletedTasks tasks={tasks} taskSetter={setTasks} />
             </main>
         </>

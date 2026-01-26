@@ -44,9 +44,9 @@ taskController.put('/:taskId', isAuth, async (req, res) => {
     const newData = req.body;
 
     try {
-        const newTask = { user: userId, newData };
+        const newTask = { user: userId, ...newData };
         await taskService.editTask(taskId, newTask);
-        res.json({});
+        res.json(newTask ?? []);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
         res.status(400).end();
