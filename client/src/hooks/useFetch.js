@@ -15,16 +15,19 @@ export default function useFetch(url, setData, refreshData) {
     }
 
     const refreshToken = async () => {
+        console.log('In refresh token function');
         const res = await fetch(`${baseURL}/refresh`, {
             method: "POST",
             credentials: 'include'
         })
+        console.log(res)
 
         if (!res.ok) {
             return false;
         }
 
         const data = await res.json();
+        console.log(data);
         loginHandler(data)
         return true;
     }
@@ -52,16 +55,21 @@ export default function useFetch(url, setData, refreshData) {
 
         options.credentials = 'include';
 
-        const response = await fetch(`${baseURL}${url}`, options);
+        let response = await fetch(`${baseURL}${url}`, options);
 
         if (!response.ok) {
-            if (response.statusText === "Unauthorized") {
+            if (response.status === 401) {
                 const refreshed = await refreshToken();
-
+                
                 if (!refreshed) {
                     logoutHandler();
                     navigate('/login');
                     throw new Error('Session Expired');
+                }
+
+                options.headers = {
+                    ...options.headers,
+                    'X-Authorization': user?.accessToken
                 }
 
                 response = await fetch(`${baseURL}${url}`, options);

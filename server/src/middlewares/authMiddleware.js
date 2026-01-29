@@ -2,6 +2,12 @@ import {JWT_SECRET} from "../config/constants.js";
 import jwt from 'jsonwebtoken'
 
 export default function authMiddleware(req, res, next) {
+    
+    if (req.path === '/refresh') {
+        console.log('In auth if')
+        return next();
+    }
+
     const token = req.header("X-Authorization");
 
     if (!token) {
@@ -17,7 +23,8 @@ export default function authMiddleware(req, res, next) {
         next()
 
     } catch (error) {
-        res.status(401).end()
+        console.log('In auth error');
+        res.status(401).end();
     }
 }
 
