@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 const baseURL = 'http://localhost:2406'
 
 export default function useFetch(url, setData, refreshData) {
-    const {isAuthenticated, user, logoutHandler} = useContext(UserContext);
+    const { isAuthenticated, user, loginHandler, logoutHandler } = useContext(UserContext);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [refresh, setRefresh] = useState(false);
@@ -14,7 +14,22 @@ export default function useFetch(url, setData, refreshData) {
         setRefresh(state => !state);
     }
 
-    const fetcher = async (url, method, data, config={}) => {
+    const refreshToken = async () => {
+        const res = await fetch(`${baseURL}/refresh`, {
+            method: "POST",
+            credentials: 'include'
+        })
+
+        if (!res.ok) {
+            return false;
+        }
+
+        const data = await res.json();
+        loginHandler(data)
+        return true;
+    }
+
+    const fetcher = async (url, method, data, config = {}) => {
         let options = {};
 
         if (method) {
@@ -35,14 +50,25 @@ export default function useFetch(url, setData, refreshData) {
             }
         }
 
+        options.credentials = 'include';
+
         const response = await fetch(`${baseURL}${url}`, options);
 
         if (!response.ok) {
             if (response.statusText === "Unauthorized") {
-                logoutHandler();
-                navigate('/login');
+                const refreshed = await refreshToken();
+
+                if (!refreshed) {
+                    logoutHandler();
+                    navigate('/login');
+                    throw new Error('Session Expired');
+                }
+
+                response = await fetch(`${baseURL}${url}`, options);
+                return response;
+            } else {
+                throw response.statusText;
             }
-            throw response.statusText;
         }
 
         const result = response.json();
@@ -56,7 +82,7 @@ export default function useFetch(url, setData, refreshData) {
 
         setIsLoading(true);
 
-            fetcher(url)
+        fetcher(url)
             .then(result => setData(result))
             .catch(error => console.error(error))
             .finally(() => setIsLoading(false))

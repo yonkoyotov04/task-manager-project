@@ -16,7 +16,7 @@ export function UserProvider({children}) {
         setUser(user);
     }
 
-    const onLogout = () => {
+    const onLogout = async () => {
         setUser(null);
     }
 

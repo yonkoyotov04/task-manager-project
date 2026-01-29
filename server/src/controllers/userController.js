@@ -2,6 +2,9 @@ import { Router } from "express";
 import { isAuth, isGuest } from "../middlewares/authMiddleware.js";
 import userSercive from "../services/userSercive.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
+import jwt from 'jsonwebtoken';
+import { REFRESH_JWT_SECRET } from "../config/constants.js";
+import { generateAuthToken } from "../utils/tokenUtils.js";
 
 const userController = Router();
 
@@ -9,8 +12,9 @@ userController.post('/register', isGuest, async (req, res) => {
     const userData = req.body;
 
     try {
-        const token = await userSercive.register(userData);
-        res.status(201).json(token)
+        const {user, refreshToken} = await userSercive.register(userData);
+        res.cookie('refreshToken', refreshToken, {httpOnly: true, secure: false, sameSite: 'none'});
+        res.status(201).json(user)
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
         res.status(400).end();
@@ -21,8 +25,9 @@ userController.post('/login', isGuest, async (req, res) => {
     const {email, password} = req.body;
 
     try {
-        const token = await userSercive.login(email, password);
-        res.status(201).json(token);
+        const {user, refreshToken} = await userSercive.login(email, password);
+        res.cookie('refreshToken', refreshToken, {httpOnly: true, secure: false, sameSite: 'none'});
+        res.status(201).json(user);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
         res.status(401).end();
@@ -34,6 +39,35 @@ userController.get('/', isAuth, async (req, res) => {
     const profileData = await userSercive.getUserData(userId);
 
     res.status(201).json(profileData);
+})
+
+userController.post('/logout', isAuth, (req, res) => {
+    res.clearCookie('refreshToken');
+    res.sendStatus(204)
+})
+
+userController.post('/refresh', isAuth, async (req, res) => {
+    const token = req.cookies.refreshToken;
+    const user = req.user;
+
+    if(!token) {
+        return res.sendStatus(401);
+    } 
+
+    jwt.verify(token, REFRESH_JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.sendStatus(403);
+        }
+
+        const newAccessToken = generateAuthToken(user);
+        const newData = {
+            _id: user.id,
+            email: user.email,
+            username: user.username,
+            accessToken: newAccessToken
+        }
+        res.status(201).json(newData);
+    })
 })
 
 export default userController;
