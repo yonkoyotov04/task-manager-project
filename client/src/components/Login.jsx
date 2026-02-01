@@ -35,7 +35,7 @@ export default function Login() {
 
             <div className="footer">
                 Don’t have an account?
-                <Link to="/register">Register</Link>
+                <Link to="/register"> Register</Link>
             </div>
         </div>
     )

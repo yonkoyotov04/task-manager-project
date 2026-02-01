@@ -18,10 +18,7 @@ export function UserProvider({children}) {
 
     const onLogout = async () => {
         await fetch('http://localhost:2406/logout', {
-            method: 'POST', 
-            headers: {
-            'X-Authorization': user?.accessToken
-        }, credentials: 'include'})
+            method: 'POST', credentials: 'include'})
         setUser(null);
     }
 

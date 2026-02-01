@@ -53,7 +53,7 @@ userController.get('/', isAuth, async (req, res) => {
     res.status(201).json(profileData);
 })
 
-userController.post('/logout', isAuth, (req, res) => {
+userController.post('/logout', (req, res) => {
     res.clearCookie('refreshToken');
     res.sendStatus(204)
 })
@@ -66,15 +66,9 @@ userController.post('/refresh', async (req, res) => {
     }
 
     const decodedToken = jwt.verify(token, REFRESH_JWT_SECRET)
-
     const newAccessToken = generateAuthToken(decodedToken);
-    const newData = {
-        _id: decodedToken.id,
-        email: decodedToken.email,
-        username: decodedToken.username,
-        accessToken: newAccessToken
-    }
-    res.status(201).json(newData);
+    
+    res.status(201).json(newAccessToken);
 })
 
 export default userController;

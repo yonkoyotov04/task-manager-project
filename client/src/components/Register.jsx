@@ -44,7 +44,7 @@ export default function Register() {
 
             <div className="footer">
                 Already have an account?
-                <Link to="/login">Login</Link>
+                <Link to="/login"> Login</Link>
             </div>
         </div>
     )

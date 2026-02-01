@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 const baseURL = 'http://localhost:2406'
 
-export default function useFetch(url, setData, refreshData) {
+export default function useFetch(url, setData) {
     const { isAuthenticated, user, loginHandler, logoutHandler } = useContext(UserContext);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -24,10 +24,11 @@ export default function useFetch(url, setData, refreshData) {
             return false;
         }
 
-        const data = await res.json();
-        console.log(data);
-        loginHandler(data)
-        return data.accessToken;
+        const newToken = await res.json();
+        const newData = {...user, accessToken: newToken};
+
+        loginHandler(newData);
+        return newToken;
     }
 
     const fetcher = async (url, method, data, config = {}) => {

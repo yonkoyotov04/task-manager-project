@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import { JWT_SECRET, REFRESH_JWT_SECRET } from '../config/constants.js';
 
 export function generateAuthToken(user) {
-    console.log(user);
     const payload = {
         id: user.id,
         email: user.email,

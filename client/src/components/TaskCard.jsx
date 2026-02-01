@@ -9,7 +9,6 @@ export default function TaskCard({_id, title, deadline, completeFunc, onEdit, ta
 
     const editHandler = (id) => {
         const editedTask = tasks.filter(task => task._id === id)[0];
-        console.log(editedTask);
         onEdit(editedTask);
     }
 

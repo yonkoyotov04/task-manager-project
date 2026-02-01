@@ -17,8 +17,6 @@ export default function EditForm({task, onEdit, taskSetter}) {
         const formData = values;
         const updatedTask = await fetcher(`/tasks/${task._id}`, 'PUT', formData, {accessToken: user?.accessToken});
 
-        console.log(updatedTask);
-
         taskSetter(tasks => tasks.map(task => task._id === updatedTask._id ? updatedTask : task));
         onEdit(null);
     }
