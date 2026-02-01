@@ -20,8 +20,8 @@ export default {
         }
 
         const user = await User.create(userData);
-        const token = generateAuthToken(user);
-        const refreshToken = generateRefreshToken(user);
+        const token = generateAuthToken(userData);
+        const refreshToken = generateRefreshToken(userData);
 
         return {
             user: {

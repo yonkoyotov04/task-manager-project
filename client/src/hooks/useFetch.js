@@ -15,12 +15,10 @@ export default function useFetch(url, setData, refreshData) {
     }
 
     const refreshToken = async () => {
-        console.log('In refresh token function');
         const res = await fetch(`${baseURL}/refresh`, {
             method: "POST",
             credentials: 'include'
         })
-        console.log(res)
 
         if (!res.ok) {
             return false;
@@ -29,7 +27,7 @@ export default function useFetch(url, setData, refreshData) {
         const data = await res.json();
         console.log(data);
         loginHandler(data)
-        return true;
+        return data.accessToken;
     }
 
     const fetcher = async (url, method, data, config = {}) => {
@@ -69,11 +67,10 @@ export default function useFetch(url, setData, refreshData) {
 
                 options.headers = {
                     ...options.headers,
-                    'X-Authorization': user?.accessToken
+                    'X-Authorization': refreshed
                 }
 
                 response = await fetch(`${baseURL}${url}`, options);
-                return response;
             } else {
                 throw response.statusText;
             }

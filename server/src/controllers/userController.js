@@ -12,8 +12,14 @@ userController.post('/register', isGuest, async (req, res) => {
     const userData = req.body;
 
     try {
-        const {user, refreshToken} = await userService.register(userData);
-        res.cookie('refreshToken', refreshToken, {httpOnly: true, secure: false, sameSite: 'none'});
+        const { user, refreshToken } = await userService.register(userData);
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: true, 
+            sameSite: 'none', 
+            path: '/',
+            maxAge: 14 * 24 * 60 * 60 * 1000
+        });
         res.status(201).json(user)
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
@@ -22,11 +28,17 @@ userController.post('/register', isGuest, async (req, res) => {
 })
 
 userController.post('/login', isGuest, async (req, res) => {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
     try {
-        const {user, refreshToken} = await userService.login(email, password);
-        res.cookie('refreshToken', refreshToken, {httpOnly: true, secure: false, sameSite: 'none'});
+        const { user, refreshToken } = await userService.login(email, password);
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+            path: '/',
+            maxAge: 14 * 24 * 60 * 60 * 1000
+        });
         res.status(201).json(user);
     } catch (error) {
         res.statusMessage = getErrorMessage(error);
@@ -47,29 +59,22 @@ userController.post('/logout', isAuth, (req, res) => {
 })
 
 userController.post('/refresh', async (req, res) => {
-    const token = req.cookies.refreshToken;
-    console.log(`The token is: ${token}`);
-    const user = req.user;
+    const token = req.cookies['refreshToken'];
 
-    if(!token) {
+    if (!token) {
         return res.sendStatus(401);
-    } 
+    }
 
-    jwt.verify(token, REFRESH_JWT_SECRET, (err) => {
-        if (err) {
-            return res.sendStatus(403);
-        }
+    const decodedToken = jwt.verify(token, REFRESH_JWT_SECRET)
 
-        const newAccessToken = generateAuthToken(user);
-        console.log(newAccessToken);
-        const newData = {
-            _id: user.id,
-            email: user.email,
-            username: user.username,
-            accessToken: newAccessToken
-        }
-        res.status(201).json(newData);
-    })
+    const newAccessToken = generateAuthToken(decodedToken);
+    const newData = {
+        _id: decodedToken.id,
+        email: decodedToken.email,
+        username: decodedToken.username,
+        accessToken: newAccessToken
+    }
+    res.status(201).json(newData);
 })
 
 export default userController;
