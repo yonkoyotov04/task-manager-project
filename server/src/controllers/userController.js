@@ -79,6 +79,8 @@ userController.put('/edit/:userId/username', async (req, res) => {
 
     const result = await userService.editUsername(userId, newUsername);
 
+    console.log(result.username);
+
     res.status(201).json(result.username);
 })
 
@@ -92,7 +94,7 @@ userController.put('/edit/:userId/password', async (req, res) => {
 
     await userService.editPassword(userId, currentPassword, newPassword, repeatPassword)
 
-    res.status(201);
+    res.status(201).json([]);
 })
 
 export default userController;

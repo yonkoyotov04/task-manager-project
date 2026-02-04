@@ -6,6 +6,7 @@ import TaskForm from './TaskForm.jsx';
 import useFetch from '../hooks/useFetch.js';
 import EditForm from './EditForm.jsx';
 import EditUsername from './EditUsername.jsx'
+import EditPassword from './EditPassword.jsx';
 
 export default function MainPage() {
 
@@ -24,6 +25,7 @@ export default function MainPage() {
                 {taskFormActive ? <TaskForm formSetter={setTaskFormActive} tasks={tasks} taskSetter={setTasks} /> : ''}
                 {editedTask !== null ? <EditForm task={editedTask} onEdit={setEditedTask} taskSetter={setTasks}/> : ''}
                 {editUsername ? <EditUsername onClose={() => setEditUsername(false)} /> : ''}
+                {editPassword ? <EditPassword onClose={() => setEditPassword(false)} /> : ''}
                 <ActiveTasks formSetter={setTaskFormActive} onEdit={setEditedTask} tasks={tasks} taskSetter={setTasks} />
                 <CompletedTasks tasks={tasks} taskSetter={setTasks} />
             </main>

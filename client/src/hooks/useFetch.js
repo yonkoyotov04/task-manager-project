@@ -77,7 +77,7 @@ export default function useFetch(url, setData) {
             }
         }
 
-        const result = response.json();
+        const result = await response.json();
         return result;
     }
 

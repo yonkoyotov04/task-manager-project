@@ -10,8 +10,6 @@ export default function editUsername({onClose}) {
 
     const [initialValues, setInitialValues] = useState({username: user?.username});
 
-    console.log(initialValues);
-
     const onSubmit = async (values) => {
         const formData = values;
         const newUsername = await fetcher(`/edit/${user._id}/username`, 'PUT', formData, {accessToken: user?.accessToken});
