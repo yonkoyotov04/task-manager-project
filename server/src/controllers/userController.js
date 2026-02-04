@@ -71,4 +71,28 @@ userController.post('/refresh', async (req, res) => {
     res.status(201).json(newAccessToken);
 })
 
+userController.put('/edit/:userId/username', async (req, res) => {
+    const usernameData = req.body;
+    const userId = req.params.userId;
+
+    const newUsername = usernameData.username;
+
+    const result = await userService.editUsername(userId, newUsername);
+
+    res.status(201).json(result.username);
+})
+
+userController.put('/edit/:userId/password', async (req, res) => {
+    const newPasswordData = req.body;
+    const userId = req.params.userId;
+
+    const currentPassword = newPasswordData.currentPassword;
+    const newPassword = newPasswordData.newPassword;
+    const repeatPassword = newPasswordData.repeatPassword;
+
+    await userService.editPassword(userId, currentPassword, newPassword, repeatPassword)
+
+    res.status(201);
+})
+
 export default userController;

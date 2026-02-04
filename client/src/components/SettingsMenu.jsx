@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import UserContext from "../contexts/userContext.jsx"
 
-export default function SettingsMenu(onClose) {
+export default function SettingsMenu({editUsername, editPassword}) {
     const {user} = useContext(UserContext);
 
     return (
@@ -12,8 +12,8 @@ export default function SettingsMenu(onClose) {
             </div>
 
             <div className="settings-actions">
-                <button className="settings-action">Change username</button>
-                <button className="settings-action">Change password</button>
+                <button className="settings-action" onClick={() => editUsername(true)}>Change username</button>
+                <button className="settings-action" onClick={() => editPassword(true)}>Change password</button>
             </div>
 
             <div className="settings-theme">

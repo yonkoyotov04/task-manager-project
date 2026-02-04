@@ -63,5 +63,25 @@ export default {
 
     getUserData(userId) {
         return User.findById(userId).select({ username: true, email: true });
+    },
+
+    editUsername(userId, newUsername) {
+        return User.findByIdAndUpdate(userId, {$set: {username: newUsername}}, {new: true});
+    },
+
+    async editPassword(userId, currentPassword, newPassword, repeatPassword) {
+        const user = User.findById(userId);
+        const passwordIsValid = await bcrypt.compare(currentPassword, user.password);
+
+        if (!passwordIsValid) {
+            throw new Error('Incorrect password!');
+        }
+
+        if (newPassword !== repeatPassword) {
+            throw new Error('Password mismatch!');
+        }
+
+        const newHashedPassword = await bcrypt.hash(newPassword, 12);
+        return User.findByIdAndUpdate(userId, {$set:{password: newHashedPassword}})
     }
 }

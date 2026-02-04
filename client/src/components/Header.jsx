@@ -3,7 +3,7 @@ import UserContext from "../contexts/userContext.jsx"
 import useFetch from "../hooks/useFetch.js"
 import SettingsMenu from "./SettingsMenu.jsx";
 
-export default function Header() {
+export default function Header({editUsernameSetter, editPasswordSetter}) {
 
     const { fetcher } = useFetch();
     const { user, logoutHandler } = useContext(UserContext);
@@ -38,7 +38,7 @@ export default function Header() {
                 <span>{user?.username}</span>
                 <div className="settingsWrapper">
                     <button className="settingsButton" onClick={() => {setShowSettings(prev => !prev)}}>⚙️</button>
-                    {showSettings && <SettingsMenu onClose={() => {setShowSettings(false)}} />}
+                    {showSettings && <SettingsMenu editUsername={editUsernameSetter} editPassword={editPasswordSetter} />}
                 </div>
                 <button onClick={logoutHandler}>Logout</button>
             </div>
