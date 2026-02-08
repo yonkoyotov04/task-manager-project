@@ -19,6 +19,12 @@ const userSchema = new Schema({
         required: [true, "A password is required!"],
         minLength: [6, "Your password is too short!"],
         match: [/^[a-zA-Z0-9]+$/, "Your password can only include letters and numbers!"]
+    },
+    theme: {
+        type: String,
+        required: true,
+        enum: ['Pink', 'Yellow', 'Red'],
+        default: 'Pink'
     }
 })
 

@@ -3,6 +3,7 @@ import useLocalStorage from "../hooks/useLocalStorage.js";
 
 const UserContext = createContext({
     user: {},
+    theme: null,
     isAuthenticated: false,
     isAdmin: false,
     loginHandler() {},
@@ -24,6 +25,7 @@ export function UserProvider({children}) {
 
     const contextValues = {
         user,
+        theme: user?.theme,
         isAuthenticated: !!user?.email,
         isAdmin: user?.email === 'jjotov488@gmail.com' ? true : false,
         loginHandler: onLogin,

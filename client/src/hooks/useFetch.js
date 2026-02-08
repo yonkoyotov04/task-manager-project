@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import UserContext from "../contexts/userContext.jsx"
+import UserContext from "../contexts/UserContext.jsx"
 import { useNavigate } from "react-router";
 
 const baseURL = 'http://localhost:2406'

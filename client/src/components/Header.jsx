@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import UserContext from "../contexts/userContext.jsx"
+import UserContext from "../contexts/UserContext.jsx"
 import useFetch from "../hooks/useFetch.js"
 import SettingsMenu from "./SettingsMenu.jsx";
 

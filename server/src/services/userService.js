@@ -28,6 +28,7 @@ export default {
                 _id: user.id,
                 email: user.email,
                 username: user.username,
+                theme: user.theme,
                 accessToken: token
             },
             refreshToken
@@ -55,6 +56,7 @@ export default {
                 _id: user.id,
                 email: user.email,
                 username: user.username,
+                theme: user.theme,
                 accessToken: token
             },
             refreshToken
@@ -83,5 +85,9 @@ export default {
 
         user.password = newPassword;
         return await user.save();
+    },
+
+    changeTheme(userId, newTheme) {
+        return User.findByIdAndUpdate(userId, {$set: {theme: newTheme}}, {runValidators: true, new: true});
     }
 }

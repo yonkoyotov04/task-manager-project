@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import useFetch from "../hooks/useFetch.js"
-import UserContext from "../contexts/userContext.jsx";
+import UserContext from "../contexts/UserContext.jsx";
 import useControlledForm from "../hooks/useControlledForm.js";
 
 export default function EditForm({task, onEdit, taskSetter}) {

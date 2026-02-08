@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import TaskCard from "./TaskCard.jsx";
 import useFetch from "../hooks/useFetch.js";
-import UserContext from "../contexts/userContext.jsx";
+import UserContext from "../contexts/UserContext.jsx";
 import useDelete from "../hooks/useDelete.jsx";
 
 export default function ActiveTasks({ formSetter, onEdit, tasks, taskSetter }) {

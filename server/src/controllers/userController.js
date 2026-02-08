@@ -97,4 +97,13 @@ userController.put('/edit/:userId/password', async (req, res) => {
     res.status(201).json([]);
 })
 
+userController.put('/:userId/theme', async (req, res) => {
+    const userId = req.params.userId;
+    const formData = req.body;
+
+    await userService.changeTheme(userId, formData.theme);
+
+    res.status(201).json([]);
+})
+
 export default userController;

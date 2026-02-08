@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import useFetch from "../hooks/useFetch.js";
 import CompletedTaskCard from "./CompletedTaskCard.jsx";
-import UserContext from "../contexts/userContext.jsx";
+import UserContext from "../contexts/UserContext.jsx";
 import useDelete from "../hooks/useDelete.jsx";
 
 export default function CompletedTasks({ tasks, taskSetter }) {

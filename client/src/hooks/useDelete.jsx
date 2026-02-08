@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import UserContext from "../contexts/userContext.jsx";
+import UserContext from "../contexts/UserContext.jsx";
 import useFetch from "./useFetch.js";
 
 export default function useDelete(type, id, data, setData) {

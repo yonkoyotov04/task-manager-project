@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import useControlledForm from "../hooks/useControlledForm.js"
-import UserContext from "../contexts/userContext.jsx";
+import UserContext from "../contexts/UserContext.jsx";
 import useFetch from "../hooks/useFetch.js";
 
 export default function editUsername({onClose}) {
