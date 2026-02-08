@@ -10,8 +10,9 @@ header {
 }
 
 header .quote {
-    font-style: italic;
-    font-weight: 700;
+    font-family: "Pacifico", cursive;
+    font-style: normal;
+    font-weight: 400;
     transition: opacity 1.5s ease-in-out;
 }
 

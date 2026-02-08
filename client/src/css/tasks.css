@@ -2,20 +2,53 @@
 .task-column {
     background: #fff0f7;
     border-radius: 24px;
-    padding: 20px;
     box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
-    max-height: 615px;
-    overflow-y: scroll;
+    min-height: 635px;
+    max-height: 635px;
+    overflow-y: auto;
     overflow-x: hidden;
     user-select: none;
     transition: 0.5s;
 }
 
+.task-column::-webkit-scrollbar {
+    width: 10px;
+}
+
+.task-column::-webkit-scrollbar-track {
+    background-color: #ffe4ef;
+    border-radius: 12px;
+    padding: 2px;
+}
+
+.task-column::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        #ff69b4,
+        #ff8fcf);
+    border-radius: 12px;
+    border: 2px solid #ffe4ef;
+    transition: background 0.3s ease;
+}
+
+.task-column::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(
+        180deg,
+        #ff4fa3,
+        #ff7fc4
+    );
+}
+
 .column-header {
     display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    padding: 20px;
+    background-color: #fff0f7;
 }
 
 .column-header h2 {
@@ -25,6 +58,11 @@
 
 .column-header span {
     font-size: 20px;
+}
+
+.task-list {
+    padding: 20px;
+    padding-top: 0;
 }
 
 /* Task card */
@@ -54,6 +92,12 @@
     color: #a25a7c;
 }
 
+.expired {
+    font-size: 12px;
+    font-weight: 700;
+    color: #D70040;
+}
+
 .task-actions {
     display: flex;
     gap: 8px;
@@ -74,25 +118,25 @@
 }
 
 .icon-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  border: 2px solid #ff69b4;
-  background: white;
-  color: #ff69b4;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 2px solid #ff69b4;
+    background: white;
+    color: #ff69b4;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .icon-btn:hover {
-  background: #ff69b4;
-  color: white;
-  transform: scale(1.05);
+    background: #ff69b4;
+    color: white;
+    transform: scale(1.05);
 }
 
 /* Responsive */

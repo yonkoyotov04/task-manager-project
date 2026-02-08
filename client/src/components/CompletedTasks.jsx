@@ -4,15 +4,15 @@ import CompletedTaskCard from "./CompletedTaskCard.jsx";
 import UserContext from "../contexts/userContext.jsx";
 import useDelete from "../hooks/useDelete.jsx";
 
-export default function CompletedTasks({tasks, taskSetter}) {
+export default function CompletedTasks({ tasks, taskSetter }) {
 
-    const completedTasks = tasks.filter(task => task.status === 'completed');
-    const {fetcher} = useFetch();
-    const {user} = useContext(UserContext);
-    const {DeletePrompt, onDeleteClick} = useDelete('all', null, tasks, taskSetter);
+    const completedTasks = tasks.filter(task => task.status === 'completed' || task.status === 'completed-expired');
+    const { fetcher } = useFetch();
+    const { user } = useContext(UserContext);
+    const { DeletePrompt, onDeleteClick } = useDelete('all', null, tasks, taskSetter);
 
     const returnTask = async (id) => {
-        const updatedTask = await fetcher(`/tasks/${id}/back`, "PUT", null, {accessToken: user?.accessToken});
+        const updatedTask = await fetcher(`/tasks/${id}/back`, "PUT", null, { accessToken: user?.accessToken });
         taskSetter(tasks => tasks.map(task => task._id === updatedTask._id ? updatedTask : task))
     }
 
@@ -22,7 +22,10 @@ export default function CompletedTasks({tasks, taskSetter}) {
                 <h2>Completed Tasks</h2>
                 <button className="icon-btn" onClick={onDeleteClick}>🗑</button>
             </div>
-            {completedTasks.map(task => <CompletedTaskCard key={task._id} returnFunc={returnTask} tasks={tasks} taskSetter={taskSetter} {...task} />)}
+            <div className="task-list">
+                {completedTasks.map(task => <CompletedTaskCard key={task._id} returnFunc={returnTask} tasks={tasks} taskSetter={taskSetter} {...task} />)}
+            </div>
+
             {DeletePrompt}
         </section>
     )

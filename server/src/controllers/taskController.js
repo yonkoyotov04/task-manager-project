@@ -38,13 +38,25 @@ taskController.put('/:taskId/complete', isAuth, async (req, res) => {
     }
 })
 
+taskController.put('/:taskId/expire', isAuth, async (req, res) => {
+    const taskId = req.params.taskId;
+
+    try {
+        await taskService.expireTask(taskId);
+        res.json([]);
+    } catch (error) {
+        res.statusMessage = getErrorMessage(error);
+        res.status(400).end();
+    }
+})
+
 taskController.put('/:taskId', isAuth, async (req, res) => {
     const taskId = req.params.taskId;
     const userId = req.user?.id;
     const newData = req.body;
 
     try {
-        const newTask = { user: userId, ...newData };
+        const newTask = { user: userId, ...newData, status: 'active'};
         await taskService.editTask(taskId, newTask);
         res.json(newTask ?? []);
     } catch (error) {

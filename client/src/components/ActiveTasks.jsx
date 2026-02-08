@@ -13,7 +13,7 @@ export default function ActiveTasks({ formSetter, onEdit, tasks, taskSetter }) {
         formSetter(true);
     }
 
-    const activeTasks = tasks.filter(task => task.status === 'active');
+    const activeTasks = tasks.filter(task => task.status === 'active' || task.status === 'expired');
 
     const completeTask = async (id) => {
         const updatedTask = await fetcher(`/tasks/${id}/complete`, "PUT", null, { accessToken: user?.accessToken });
@@ -27,8 +27,9 @@ export default function ActiveTasks({ formSetter, onEdit, tasks, taskSetter }) {
                 <button className="icon-btn" onClick={showTaskForm}>＋</button>
             </div>
 
-            {activeTasks.map(task => <TaskCard key={task._id} completeFunc={completeTask} onEdit={onEdit} tasks={tasks} taskSetter={taskSetter} {...task} />)}
-
+            <div className="task-list">
+                {activeTasks.map(task => <TaskCard key={task._id} completeFunc={completeTask} onEdit={onEdit} tasks={tasks} taskSetter={taskSetter} {...task} />)}
+            </div>
         </section>
     )
 }

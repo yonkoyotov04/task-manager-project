@@ -17,7 +17,14 @@ export default {
         return Task.findByIdAndDelete(taskId);
     },
 
-    completeTask(taskId) {
+    async completeTask(taskId) {
+        const task = await Task.findById(taskId).select({'status': true});
+        let taskStatus = 'completed';
+
+        if (task.status === 'expired') {
+            taskStatus = 'completed-expired'
+        }
+
         const date = new Date();
         const shortDate = date.toLocaleString("en-GB", {
             year: 'numeric',
@@ -26,7 +33,12 @@ export default {
             hour: '2-digit',
             minute: '2-digit'
         })
-        return Task.findByIdAndUpdate(taskId, { status: 'completed', completedAt: shortDate }, { runValidators: true, new: true });
+        
+        return Task.findByIdAndUpdate(taskId, { status: taskStatus, completedAt: shortDate }, { runValidators: true, new: true });
+    },
+
+    expireTask(taskId) {
+        return Task.findByIdAndUpdate(taskId, {status: 'expired'}, {runValidators: true, new: true});
     },
 
     deleteAllCompletedTasks(userId) {
