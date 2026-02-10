@@ -1,0 +1,53 @@
+.theme-pink {
+    --bg-main: linear-gradient(135deg, #ffe4f1, #ffd6eb);
+    --task-field: #fff0f7;
+    --task-card: white;
+    --task-button: #ffd1e8;
+    --task-button-hover: #ff9fcf;
+    --top-button: #ff69b4;
+    --scrollbar-track: #ffe4ef;
+    --scrollbar-thumb: linear-gradient(180deg, #ff69b4, #ff8fcf);
+    --scrollbar-hover: linear-gradient(180deg, #ff4fa3, #ff7fc4);
+    --header-background: #ffb6d9;
+    --header-button-hover: #ff4fa3;
+    --delete-button: #ff4f4f;
+    --delete-hover: #e63939;
+    --auth-box-shadow: rgba(255, 105, 180, 0.25);
+    --task-form-background: rgba(255, 182, 193, 0.5);
+}
+
+.theme-yellow {
+    --bg-main: linear-gradient(135deg, #fff9db, #fff2b3);
+    --task-field: #fff6cc;
+    --task-card: #ffffff;
+    --task-button: #ffe066;
+    --task-button-hover: #ffd43b;
+    --top-button: #fab005;
+    --scrollbar-track: #fff3bf;
+    --scrollbar-thumb: linear-gradient(180deg, #ffd43b, #fab005);
+    --scrollbar-hover: linear-gradient(180deg, #fcc419, #f59f00);
+    --header-background: #ffe066;
+    --header-button-hover: #f59f00;
+    --delete-button: #ff6b6b;
+    --delete-hover: #fa5252;
+    --auth-box-shadow: rgba(255, 105, 180, 0.25);
+    --task-form-background: rgba(255, 182, 193, 0.5);
+}
+
+.theme-red {
+    --bg-main: linear-gradient(135deg, #fff1f2, #ffe0e3);
+    --task-field: #ffe5e8;
+    --task-card: #ffffff;
+    --task-button: #ffb3ba;
+    --task-button-hover: #ff8a94;
+    --top-button: #e03131;
+    --scrollbar-track: #ffe3e6;
+    --scrollbar-thumb: linear-gradient(180deg, #ff6b6b, #e03131);
+    --scrollbar-hover: linear-gradient(180deg, #fa5252, #c92a2a);
+    --header-background: #ffccd1;
+    --header-button-hover: #c92a2a;
+    --delete-button: #c92a2a;
+    --delete-hover: #a51111;
+    --auth-box-shadow: rgba(255, 105, 180, 0.25);
+    --task-form-background: rgba(255, 182, 193, 0.5);
+}

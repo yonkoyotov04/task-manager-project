@@ -5,13 +5,21 @@ import { useState } from "react";
 import useFetch from "../hooks/useFetch.js";
 
 export default function SettingsMenu({ editUsername, editPassword }) {
-    const { user, theme } = useContext(UserContext);
+    const { user, theme, loginHandler } = useContext(UserContext);
     const [initialValues, setInitialValues] = useState({theme})
     const {fetcher} = useFetch();
 
     const onSubmit = async (values) => {
         const formData = values;
-        await fetcher(`/${user._id}/theme`, 'PUT', formData, {accessToken: user?.accessToken});
+        const newTheme = await fetcher(`/${user._id}/theme`, 'PUT', formData, {accessToken: user?.accessToken});
+
+        const userData = JSON.parse(localStorage.getItem('user'));
+        const updatedUser = {
+            ...userData,
+            theme: newTheme
+        }
+
+        loginHandler(updatedUser);
     }
 
     const {values, changeHandler, submitHandler} = useControlledForm(initialValues, onSubmit)
@@ -32,9 +40,9 @@ export default function SettingsMenu({ editUsername, editPassword }) {
                 <form method="PUT" onSubmit={submitHandler}>
                     <label>Theme </label>
                     <select name="theme" value={values.theme} onChange={changeHandler}>
-                        <option value='Pink'>Pink 🦋</option>
-                        <option value='Yellow'>Yellow 🍋</option>
-                        <option value='Red'>Red 🌹</option>
+                        <option value='pink'>Pink 🦋</option>
+                        <option value='yellow'>Yellow 🍋</option>
+                        <option value='red'>Red 🌹</option>
                     </select>
                     <button type="submit">Apply</button>
                 </form>

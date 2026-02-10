@@ -1,8 +1,8 @@
 /* Task columns */
 .task-column {
-    background: #fff0f7;
+    background: var(--task-field);
     border-radius: 24px;
-    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+    box-shadow: 0 10px 25px var(--auth-box-shadow);
     min-height: 635px;
     max-height: 635px;
     overflow-y: auto;
@@ -16,27 +16,20 @@
 }
 
 .task-column::-webkit-scrollbar-track {
-    background-color: #ffe4ef;
+    background-color: var(--scrollbar-track);
     border-radius: 12px;
     padding: 2px;
 }
 
 .task-column::-webkit-scrollbar-thumb {
-    background: linear-gradient(
-        180deg,
-        #ff69b4,
-        #ff8fcf);
+    background: var(--scrollbar-thumb);
     border-radius: 12px;
     border: 2px solid #ffe4ef;
     transition: background 0.3s ease;
 }
 
 .task-column::-webkit-scrollbar-thumb:hover{
-    background: linear-gradient(
-        180deg,
-        #ff4fa3,
-        #ff7fc4
-    );
+    background: var(--scrollbar-hover)
 }
 
 .column-header {
@@ -48,7 +41,7 @@
     align-items: center;
     margin-bottom: 15px;
     padding: 20px;
-    background-color: #fff0f7;
+    background-color: var(--task-field);
 }
 
 .column-header h2 {
@@ -65,12 +58,11 @@
     padding-top: 0;
 }
 
-/* Task card */
 .task-card {
-    background: white;
+    background: var(--task-card);
     border-radius: 18px;
     padding: 16px;
-    box-shadow: 0 6px 15px rgba(255, 182, 193, 0.3);
+    box-shadow: 0 6px 15px var(--task-form-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -109,21 +101,21 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    background: #ffd1e8;
+    background: var(--task-button);
     font-size: 14px;
 }
 
 .task-actions button:hover {
-    background: #ff9fcf;
+    background: var(--task-button-hover);
 }
 
 .icon-btn {
     width: 34px;
     height: 34px;
     border-radius: 8px;
-    border: 2px solid #ff69b4;
+    border: 2px solid var(--top-button);
     background: white;
-    color: #ff69b4;
+    color: var(--top-button);
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
@@ -134,7 +126,7 @@
 }
 
 .icon-btn:hover {
-    background: #ff69b4;
+    background: var(--top-button);
     color: white;
     transform: scale(1.05);
 }

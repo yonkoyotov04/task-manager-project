@@ -2,10 +2,10 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ffb6d9;
+    background: var(--header-background);
     padding: 12px 20px;
     border-radius: 16px;
-    box-shadow: 0 6px 15px rgba(255, 105, 180, 0.25);
+    box-shadow: 0 6px 15px var(--auth-box-shadow);
     margin-bottom: 25px;
 }
 
@@ -24,7 +24,7 @@ header .user {
 }
 
 header button {
-    background: #ff69b4;
+    background: var(--top-button);
     border: none;
     color: white;
     padding: 6px 14px;
@@ -34,5 +34,5 @@ header button {
 }
 
 header button:hover {
-    background: #ff4fa3;
+    background: var(--header-button-hover);
 }

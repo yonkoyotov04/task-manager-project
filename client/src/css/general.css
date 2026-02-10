@@ -5,15 +5,14 @@
     font-family: "Poppins", sans-serif;
 }
 
-body {
-    background: linear-gradient(135deg, #ffe4f1, #ffd6eb);
+.app {
+    background: var(--bg-main);
     min-height: 100vh;
     padding: 20px;
-    color: #5a2a4a;
+    /* color: #5a2a4a; */
 }
 
-/* 🦋 Butterfly background */
-body::before {
+.app::before {
     position: fixed;
     top: 20px;
     left: 20px;
@@ -21,7 +20,7 @@ body::before {
     opacity: 0.15;
 }
 
-body::after {
+.app::after {
     position: fixed;
     bottom: 30px;
     right: 40px;

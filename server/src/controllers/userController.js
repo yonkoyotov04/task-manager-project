@@ -101,9 +101,9 @@ userController.put('/:userId/theme', async (req, res) => {
     const userId = req.params.userId;
     const formData = req.body;
 
-    await userService.changeTheme(userId, formData.theme);
+    const data = await userService.changeTheme(userId, formData.theme);
 
-    res.status(201).json([]);
+    res.status(201).json(data.theme);
 })
 
 export default userController;

@@ -1,10 +1,9 @@
-/* Confirmation card */
 .delete-modal {
-  background: #fff0f7;
+  background: var(--task-field);
   padding: 25px;
   width: 320px;
   border-radius: 22px;
-  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.35);
+  box-shadow: 0 20px 40px var(--auth-box-shadow);
   text-align: center;
   animation: popIn 0.25s ease;
 }
@@ -19,27 +18,24 @@
   opacity: 0.8;
 }
 
-/* Buttons row */
 .delete-actions {
   display: flex;
   gap: 10px;
 }
 
-/* Reuse your cancel style */
 .cancel-btn {
   flex: 1;
   background: transparent;
-  border: 2px solid #ffb6d9;
-  color: #ff69b4;
+  border: 2px solid var(--header-background);
+  color: var(--top-button);
   border-radius: 999px;
   padding: 10px;
   cursor: pointer;
 }
 
-/* Red-ish delete button (still cute) */
 .delete-btn {
   flex: 1;
-  background: #ff4f4f;
+  background: var(--delete-button);
   border: none;
   color: white;
   border-radius: 999px;
@@ -49,5 +45,5 @@
 }
 
 .delete-btn:hover {
-  background: #e63939;
+  background: var(--delete-hover);
 }

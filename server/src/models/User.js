@@ -23,8 +23,8 @@ const userSchema = new Schema({
     theme: {
         type: String,
         required: true,
-        enum: ['Pink', 'Yellow', 'Red'],
-        default: 'Pink'
+        enum: ['pink', 'yellow', 'red'],
+        default: 'pink'
     }
 })
 
