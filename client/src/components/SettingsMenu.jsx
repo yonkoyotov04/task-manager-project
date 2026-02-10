@@ -44,7 +44,7 @@ export default function SettingsMenu({ editUsername, editPassword }) {
                         <option value='yellow'>Yellow 🍋</option>
                         <option value='red'>Red 🌹</option>
                     </select>
-                    <button type="submit">Apply</button>
+                    {values.theme !== theme && <button type="submit">Apply</button>}
                 </form>
 
             </div>

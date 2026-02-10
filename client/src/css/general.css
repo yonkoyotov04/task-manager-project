@@ -6,7 +6,7 @@
 }
 
 .app {
-    background: var(--bg-main);
+    background: var(--bg-main, linear-gradient(135deg, #ffe4f1, #ffd6eb));
     min-height: 100vh;
     padding: 20px;
     /* color: #5a2a4a; */
