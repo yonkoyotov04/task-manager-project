@@ -25,7 +25,7 @@ export default function editUsername({onClose}) {
     return (
         <div className="modal-overlay" id="taskModal">
             <div className="modal">
-                <h2>Edit Username</h2>
+                <h2>Change Username</h2>
 
                 <form method="PUT" onSubmit={submitHandler}>
                     <input type="text" name="username" placeholder="Username" onChange={changeHandler} value={values.username} required />

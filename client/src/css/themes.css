@@ -1,5 +1,6 @@
 .theme-pink {
     --bg-main: linear-gradient(135deg, #ffe4f1, #ffd6eb);
+    --bg-image: url(../assets/2.png);
     --task-field: #fff0f7;
     --task-card: white;
     --task-button: #ffd1e8;
@@ -17,6 +18,7 @@
 
 .theme-yellow {
     --bg-main: linear-gradient(135deg, #fff9db, #fff2b3);
+    --bg-image: url(../assets/1.png);
     --task-field: #fff6cc;
     --task-card: #ffffff;
     --task-button: #ffe066;
@@ -35,15 +37,16 @@
 
 .theme-red {
     --bg-main: linear-gradient(135deg, #fff1f2, #ffe0e3);
-    --task-field: #ffe5e8;
+    --bg-image: url('../assets/3.png');
+    --task-field: #f04c5f;
     --task-card: #ffffff;
-    --task-button: #ffb3ba;
-    --task-button-hover: #ff8a94;
+    --task-button: #ff5667;
+    --task-button-hover: #ff6471;
     --top-button: #e03131;
     --scrollbar-track: #ffe3e6;
     --scrollbar-thumb: linear-gradient(180deg, #ff6b6b, #e03131);
     --scrollbar-hover: linear-gradient(180deg, #fa5252, #c92a2a);
-    --header-background: #ffccd1;
+    --header-background: #f04c5f;
     --header-button-hover: #c92a2a;
     --delete-button: #c92a2a;
     --delete-hover: #a51111;

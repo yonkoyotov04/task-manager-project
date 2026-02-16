@@ -7,6 +7,11 @@
 
 .app {
     background: var(--bg-main, linear-gradient(135deg, #ffe4f1, #ffd6eb));
+    background-image: var(--bg-image, linear-gradient(135deg, #ffe4f1, #ffd6eb));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
     padding: 20px;
     /* color: #5a2a4a; */

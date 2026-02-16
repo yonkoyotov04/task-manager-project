@@ -25,7 +25,7 @@ export default function EditPassword({onClose}) {
     return (
         <div className="modal-overlay" id="taskModal">
             <div className="modal">
-                <h2>Edit Password</h2>
+                <h2>Change Password</h2>
 
                 <form method="PUT" onSubmit={submitHandler}>
                     <input 
