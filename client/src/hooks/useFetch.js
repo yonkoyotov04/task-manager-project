@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react"
 import UserContext from "../contexts/UserContext.jsx"
 import { useNavigate } from "react-router";
+import ErrorContext from "../contexts/ErrorContext.jsx";
 
 const baseURL = 'http://localhost:2406'
 
 export default function useFetch(url, setData) {
     const { isAuthenticated, user, loginHandler, logoutHandler } = useContext(UserContext);
+    const {errorSetter} = useContext(ErrorContext);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [refresh, setRefresh] = useState(false);
@@ -73,6 +75,7 @@ export default function useFetch(url, setData) {
 
                 response = await fetch(`${baseURL}${url}`, options);
             } else {
+                errorSetter(response.statusText);
                 throw response.statusText;
             }
         }
@@ -90,7 +93,7 @@ export default function useFetch(url, setData) {
 
         fetcher(url)
             .then(result => setData(result))
-            .catch(error => console.error(error))
+            .catch(error => errorSetter(error.message))
             .finally(() => setIsLoading(false))
     }, [url, refresh])
 

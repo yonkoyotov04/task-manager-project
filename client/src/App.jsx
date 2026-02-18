@@ -7,22 +7,25 @@ import QuoteForm from './components/QuoteForm.jsx'
 import { useContext } from 'react'
 import UserContext from './contexts/UserContext.jsx'
 import NotFound from './components/NotFound.jsx'
+import { ErrorProvider } from './contexts/ErrorContext.jsx'
 
 function App() {
 
-    const {user} = useContext(UserContext);
-    
+    const { user } = useContext(UserContext);
+
     return (
         <div className={user?.theme ? `app theme-${user?.theme}` : 'app'}>
-            <Routes>
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route element={<AuthRoutes />}>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/quote" element={<QuoteForm />} />
-                </Route>
-                <Route path='*' element={<NotFound />} />
-            </Routes>
+            <ErrorProvider>
+                <Routes>
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route element={<AuthRoutes />}>
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/quote" element={<QuoteForm />} />
+                    </Route>
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
+            </ErrorProvider>
         </div>
     )
 }

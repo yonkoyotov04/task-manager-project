@@ -1,0 +1,64 @@
+.error-container {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    right: 50px;
+    gap: 12px;
+
+    background: var(--bg-main, linear-gradient(135deg, #ffe4f1, #ffd6eb));
+    color: #000000;
+
+    padding: 14px 18px;
+    border-radius: 12px;
+
+    border: 1px solid var(--top-button, #ff69b4);
+
+    box-shadow:
+        0 0 12px rgba(57, 56, 56, 0.35),
+        0 4px 15px rgba(0, 0, 0, 0.4);
+
+    font-family: inherit;
+
+    animation: errorPop 0.25s ease;
+}
+
+.error-text p {
+    margin: 2px 0 0 0;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.error-close {
+    margin-left: auto;
+
+    background: transparent;
+    border: none;
+
+    color: #000000;
+    font-size: 20px;
+
+    cursor: pointer;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 6px;
+
+    transition: 0.2s;
+}
+
+.error-close:hover {
+    background: var(--delete-hover, #e63939);
+}
+
+@keyframes errorPop {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

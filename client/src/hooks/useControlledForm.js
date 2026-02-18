@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import ErrorContext from "../contexts/ErrorContext.jsx";
 
 export default function useControlledForm(initialValues, onSubmit) {
     const [values, setValues] = useState(initialValues)
+    const {errorSetter} = useContext(ErrorContext);
 
     useEffect(() => {
         setValues(initialValues);
@@ -17,6 +19,7 @@ export default function useControlledForm(initialValues, onSubmit) {
         try {
             await onSubmit(values)
         } catch (error) {
+            errorSetter(error.message);
             throw error.message;
         }
     }
