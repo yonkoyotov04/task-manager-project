@@ -17,7 +17,8 @@ taskController.post('/active', isAuth, async (req, res) => {
     const userId = req.user?.id;
 
     try {
-        const taskData = { user: userId, ...formData };
+        const taskData = {...formData, user: userId, title: formData.title.trim()};
+        console.log(taskData);
         const task = await taskService.createTask(taskData);
         res.json(task ?? []);
     } catch (error) {
@@ -56,7 +57,7 @@ taskController.put('/:taskId', isAuth, async (req, res) => {
     const newData = req.body;
 
     try {
-        const newTask = { user: userId, ...newData, status: 'active'};
+        const newTask = {...newData, title: newData.title.trim(), user: userId, status: 'active'};
         await taskService.editTask(taskId, newTask);
         res.json(newTask ?? []);
     } catch (error) {

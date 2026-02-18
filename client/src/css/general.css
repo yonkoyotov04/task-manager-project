@@ -14,7 +14,6 @@
     background-attachment: fixed;
     min-height: 100vh;
     padding: 20px;
-    /* color: #5a2a4a; */
 }
 
 .app::before {

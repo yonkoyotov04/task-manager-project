@@ -9,7 +9,11 @@ import { generateAuthToken } from "../utils/tokenUtils.js";
 const userController = Router();
 
 userController.post('/register', isGuest, async (req, res) => {
-    const userData = req.body;
+    let userData = req.body;
+
+    userData['email'] = userData.email.trim();
+    userData['username'] = userData.username.trim();
+    userData['password'] = userData.password.trim();
 
     try {
         const { user, refreshToken } = await userService.register(userData);
@@ -75,11 +79,9 @@ userController.put('/edit/:userId/username', async (req, res) => {
     const usernameData = req.body;
     const userId = req.params.userId;
 
-    const newUsername = usernameData.username;
+    const newUsername = usernameData.username.trim();
 
     const result = await userService.editUsername(userId, newUsername);
-
-    console.log(result.username);
 
     res.status(201).json(result.username);
 })
@@ -88,9 +90,9 @@ userController.put('/edit/:userId/password', async (req, res) => {
     const newPasswordData = req.body;
     const userId = req.params.userId;
 
-    const currentPassword = newPasswordData.currentPassword;
-    const newPassword = newPasswordData.newPassword;
-    const repeatPassword = newPasswordData.repeatPassword;
+    const currentPassword = newPasswordData.currentPassword.trim();
+    const newPassword = newPasswordData.newPassword.trim();
+    const repeatPassword = newPasswordData.repeatPassword.trim();
 
     await userService.editPassword(userId, currentPassword, newPassword, repeatPassword)
 

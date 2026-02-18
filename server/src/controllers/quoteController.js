@@ -12,7 +12,8 @@ quoteController.get('/', isAuth, async (req, res) => {
 })
 
 quoteController.post('/', isAuth, async (req, res) => {
-    const quoteText = req.body;
+    let quoteText = req.body;
+    quoteText['text'] = quoteText.text.trim();
 
     await quoteService.createQuote(quoteText);
 })
