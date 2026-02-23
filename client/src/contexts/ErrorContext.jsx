@@ -26,7 +26,7 @@ export function ErrorProvider({ children }) {
     return (
         <ErrorContext.Provider value={contextValues}>
             {children}
-            {error && <ErrorContainer error={error} errorSetter={errorSetter} />}
+            {/* {error && <ErrorContainer error={error} errorSetter={errorSetter} />} */}
         </ErrorContext.Provider>
     )
 }

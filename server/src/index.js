@@ -8,6 +8,7 @@ import 'dotenv/config'
 
 const database_uri = process.env.MONGODB_URI;
 const uri = process.env.SERVER_URI;
+const PORT = process.env.PORT || '2406';
 
 const app = express();
 // 'mongodb://localhost:27017/'
@@ -22,7 +23,7 @@ try {
 }
 
 app.use(cors({
-    origin: true,
+    origin: 'https://task-manager-e.netlify.app/',
     credentials: true,
 }));
 
@@ -32,4 +33,4 @@ app.use(cookieParser());
 app.use(authMiddleware);
 app.use(routes);
 
-app.listen(2406, () => {console.log(`The server is listening on port ${uri}.....`)})
+app.listen(PORT, "0.0.0.0", () => {console.log(`The server is listening on port ${PORT}.....`)})
