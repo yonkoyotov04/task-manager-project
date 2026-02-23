@@ -10,15 +10,18 @@ header {
 }
 
 header .quote {
+    /* display: flex; */
     font-family: "Pacifico", cursive;
     font-style: normal;
     font-weight: 400;
+    text-wrap-mode: wrap;
     transition: opacity 1.5s ease-in-out;
 }
 
-header .user {
+header .navi {
     display: flex;
     align-items: center;
+    margin-left: auto;
     gap: 12px;
     font-size: 14px;
 }
@@ -35,4 +38,18 @@ header button {
 
 header button:hover {
     background: var(--header-button-hover);
+}
+
+@media screen and (max-width: 500px) {
+    header {
+        flex-direction: column-reverse;
+    }
+
+    .navi {
+        align-self: flex-end;
+    }
+
+    .quote {
+        align-self: flex-start;
+    }
 }

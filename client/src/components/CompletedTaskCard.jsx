@@ -1,12 +1,8 @@
-import { useContext } from "react";
-import useFetch from "../hooks/useFetch.js"
-import UserContext from "../contexts/UserContext.jsx";
 import useDelete from "../hooks/useDelete.jsx";
 
 export default function CompletedTaskCard({_id, title, completedAt, status, returnFunc, tasks, taskSetter}) {
 
     const {DeletePrompt, onDeleteClick} = useDelete('single', _id, tasks, taskSetter)
-    console.log(status);
 
     return (
         <div className="task-card">

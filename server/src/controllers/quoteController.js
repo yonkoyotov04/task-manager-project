@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { isAuth } from "../middlewares/authMiddleware.js";
 import quoteService from "../services/quoteService.js";
+import 'dotenv/config'
 
 const quoteController = Router();
+const uri = process.env.SERVER_URI;
 
 quoteController.get('/', isAuth, async (req, res) => {
     const result = await quoteService.getRandomQuote();

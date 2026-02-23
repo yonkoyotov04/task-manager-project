@@ -4,11 +4,16 @@ import cors from 'cors';
 import authMiddleware from './middlewares/authMiddleware.js';
 import routes from './routes.js';
 import cookieParser from 'cookie-parser'
+import 'dotenv/config'
+
+const database_uri = process.env.MONGODB_URI;
+const uri = process.env.SERVER_URI;
 
 const app = express();
+// 'mongodb://localhost:27017/'
 
 try {
-    await mongoose.connect('mongodb://localhost:27017/', {
+    await mongoose.connect(database_uri, {
         dbName: 'task-manager-project'
     })
     console.log("Successfully connected to database!")
@@ -27,4 +32,4 @@ app.use(cookieParser());
 app.use(authMiddleware);
 app.use(routes);
 
-app.listen(2406, () => {console.log("The server is listening on port http://localhost:2406.....")})
+app.listen(2406, () => {console.log(`The server is listening on port ${uri}.....`)})

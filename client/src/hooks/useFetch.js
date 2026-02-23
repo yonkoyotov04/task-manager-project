@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from "react"
 import UserContext from "../contexts/UserContext.jsx"
 import { useNavigate } from "react-router";
 import ErrorContext from "../contexts/ErrorContext.jsx";
+import { SERVER_URI } from "../config/constants.js";
 
-const baseURL = 'http://localhost:2406'
+const baseURL = SERVER_URI;
+// 'http://localhost:2406'
 
 export default function useFetch(url, setData) {
     const { isAuthenticated, user, loginHandler, logoutHandler } = useContext(UserContext);

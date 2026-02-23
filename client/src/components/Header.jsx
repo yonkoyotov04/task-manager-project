@@ -3,12 +3,13 @@ import UserContext from "../contexts/UserContext.jsx"
 import useFetch from "../hooks/useFetch.js"
 import SettingsMenu from "./SettingsMenu.jsx";
 
-export default function Header({editUsernameSetter, editPasswordSetter}) {
+export default function Header({ editUsernameSetter, editPasswordSetter }) {
 
     const { fetcher } = useFetch();
     const { user, logoutHandler } = useContext(UserContext);
     const [quote, setQuote] = useState('');
     const [visible, setVisible] = useState(false);
+    const [rendered, setRendered] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
 
     useEffect(() => {
@@ -22,22 +23,30 @@ export default function Header({editUsernameSetter, editPasswordSetter}) {
                 setQuote(randomQuote);
                 setVisible(true);
 
-                setTimeout(() => {
-                    setVisible(false);
-                }, 10000)
+                if (visible) {
+                    setRendered(true);
+                    setTimeout(() => {
+                        setVisible(false);
+                    }, 10000)
+                } else {
+                    setTimeout(() => {
+                        setRendered(false)
+                    }, 1500)
+                }
             }
         }, 60000)
+
 
         return () => clearInterval(interval);
     }, [])
 
     return (
         <header>
-            <div className="quote" style={{opacity: visible ? 1 : 0}}>{quote}</div>
-            <div className="user">
+            <div className="quote" style={{ display: rendered ? "flex" : "none", opacity: visible ? '1' : '0'}}>{quote}</div>
+            <div className="navi">
                 <span>{user?.username}</span>
                 <div className="settingsWrapper">
-                    <button className="settingsButton" onClick={() => {setShowSettings(prev => !prev)}}>⚙️</button>
+                    <button className="settingsButton" onClick={() => { setShowSettings(prev => !prev) }}>⚙️</button>
                     {showSettings && <SettingsMenu editUsername={editUsernameSetter} editPassword={editPasswordSetter} />}
                 </div>
                 <button onClick={logoutHandler}>Logout</button>
