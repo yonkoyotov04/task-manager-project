@@ -38,8 +38,6 @@ export default {
     async login(email, password) {
         const user = await User.findOne({ email });
 
-        console.log(user);
-
         if (!user) {
             throw new Error('Email or Password is invaild!');
         }
