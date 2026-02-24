@@ -2,9 +2,7 @@ import useDelete from "../hooks/useDelete.jsx";
 
 export default function CompletedTaskCard({_id, title, completedAt, status, returnFunc, tasks, taskSetter}) {
 
-    const {DeletePrompt, onDeleteClick} = useDelete('single', _id, tasks, taskSetter)
-
-    console.log(completedAt);
+    const {DeletePrompt, onDeleteClick} = useDelete('single', _id, tasks, taskSetter);
 
     completedAt = new Date(completedAt).toLocaleTimeString("en-GB", {
             year: 'numeric',

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Pacifico";
+    src: url(../../public/fonts/Pacifico-Regular.ttf) format("truetype");
+}
+
 header {
     display: flex;
     justify-content: space-between;
