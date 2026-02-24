@@ -39,7 +39,9 @@ userController.post('/login', isGuest, async (req, res) => {
     console.log('Body Received', req.body);
 
     try {
+        console.log('Inside try catch')
         const { user, refreshToken } = await userService.login(email, password);
+        console.log(user, refreshToken);
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: true,
