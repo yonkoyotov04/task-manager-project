@@ -12,6 +12,15 @@ const PORT = process.env.PORT || 2406;
 const app = express();
 // 'mongodb://localhost:27017/'
 
+try {
+    await mongoose.connect(process.env.MONGO_URI, {
+        dbName: 'task-manager-project'
+    })
+    console.log("Successfully connected to database!")
+} catch (error) {
+    console.log("Failed to connect to database", error.message);
+}
+
 app.use(cors({
     origin: [
         'https://task-manager-e.netlify.app',
@@ -26,13 +35,4 @@ app.use(cookieParser());
 app.use(authMiddleware);
 app.use(routes);
 
-app.listen(PORT, () => {console.log(`The server is listening on port ${PORT}.....`)})
-
-try {
-    await mongoose.connect(process.env.MONGO_URI, {
-        dbName: 'task-manager-project'
-    })
-    console.log("Successfully connected to database!")
-} catch (error) {
-    console.log("Failed to connect to database", error.message);
-}
+app.listen(PORT, '0.0.0.0', () => {console.log(`The server is listening on port ${PORT}.....`)})

@@ -10,6 +10,8 @@ const userController = Router();
 
 userController.post('/register', isGuest, async (req, res) => {
     let userData = req.body;
+    
+    console.log('Body Received', req.body);
 
     userData['email'] = userData.email.trim();
     userData['username'] = userData.username.trim();
@@ -33,6 +35,8 @@ userController.post('/register', isGuest, async (req, res) => {
 
 userController.post('/login', isGuest, async (req, res) => {
     const { email, password } = req.body;
+
+    console.log('Body Received', req.body);
 
     try {
         const { user, refreshToken } = await userService.login(email, password);
