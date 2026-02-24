@@ -8,6 +8,7 @@ import { useContext } from 'react'
 import UserContext from './contexts/UserContext.jsx'
 import NotFound from './components/NotFound.jsx'
 import { ErrorProvider } from './contexts/ErrorContext.jsx'
+import GuestRoutes from './utils/GuestRoutes.jsx'
 
 function App() {
 
@@ -17,8 +18,10 @@ function App() {
         <div className={user?.theme ? `app theme-${user?.theme}` : 'app'}>
             <ErrorProvider>
                 <Routes>
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/register' element={<Register />} />
+                    <Route element={<GuestRoutes />}>
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/register' element={<Register />} />
+                    </Route>
                     <Route element={<AuthRoutes />}>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/quote" element={<QuoteForm />} />

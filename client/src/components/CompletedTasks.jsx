@@ -6,10 +6,12 @@ import useDelete from "../hooks/useDelete.jsx";
 
 export default function CompletedTasks({ tasks, taskSetter }) {
 
-    const completedTasks = tasks.filter(task => task.status === 'completed' || task.status === 'completed-expired');
     const { fetcher } = useFetch();
     const { user } = useContext(UserContext);
     const { DeletePrompt, onDeleteClick } = useDelete('all', null, tasks, taskSetter);
+
+    let completedTasks = tasks.filter(task => task.status === 'completed' || task.status === 'completed-expired');
+    completedTasks = completedTasks.sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
 
     const returnTask = async (id) => {
         const updatedTask = await fetcher(`/tasks/${id}/back`, "PUT", null, { accessToken: user?.accessToken });

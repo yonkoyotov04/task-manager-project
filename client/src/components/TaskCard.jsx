@@ -18,7 +18,8 @@ export default function TaskCard({ _id, title, deadline, status, completeFunc, o
 
     if (currentStatus !== 'expired') {
         const currentDate = new Date().getTime();
-        const taskDate = new Date(deadline).getTime()
+        let taskDate = new Date(deadline).getTime()
+        taskDate = taskDate + 86400000;
 
         if (currentDate > taskDate) {
             currentStatus = 'expired';

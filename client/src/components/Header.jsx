@@ -26,11 +26,11 @@ export default function Header({ editUsernameSetter, editPasswordSetter }) {
 
                 setTimeout(() => {
                     setVisible(false);
-                }, 10000)
+                }, 20000)
 
                 setTimeout(() => {
                     setRendered(false);
-                }, 11500)
+                }, 21500)
             }
         }, 60000)
 

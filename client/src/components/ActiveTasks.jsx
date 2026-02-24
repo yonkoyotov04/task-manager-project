@@ -12,7 +12,8 @@ export default function ActiveTasks({ formSetter, onEdit, tasks, taskSetter }) {
         formSetter(true);
     }
 
-    const activeTasks = tasks.filter(task => task.status === 'active' || task.status === 'expired');
+    let activeTasks = tasks.filter(task => task.status === 'active' || task.status === 'expired');
+    activeTasks = activeTasks.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
 
     const completeTask = async (id) => {
         const updatedTask = await fetcher(`/tasks/${id}/complete`, "PUT", null, { accessToken: user?.accessToken });

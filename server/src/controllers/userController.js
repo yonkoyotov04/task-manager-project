@@ -110,4 +110,8 @@ userController.put('/:userId/theme', async (req, res) => {
     res.status(201).json(data.theme);
 })
 
+userController.get('/wake', (req, res) => {
+    res.status(200).send('Wake up!');
+})
+
 export default userController;
