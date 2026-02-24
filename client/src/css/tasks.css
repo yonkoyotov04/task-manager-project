@@ -71,7 +71,7 @@
 .task-info {
     display: flex;
     flex-direction: column;
-    max-width: 185px;
+    max-width: 685px;
     gap: 4px;
 }
 
@@ -137,5 +137,9 @@
 @media (max-width: 800px) {
     .container {
         grid-template-columns: 1fr;
+    }
+
+    .task-info {
+        max-width: 185px;
     }
 }

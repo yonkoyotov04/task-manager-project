@@ -14,8 +14,11 @@ export default function useFetch(url, setData) {
         setRefresh(state => !state);
     }
 
-    const URI = import.meta.env.VITE_API_URI;
     // 'http://localhost:2406'
+    // import.meta.env.VITE_API_URI
+
+    const URI = import.meta.env.VITE_API_URI;
+    
 
     const refreshToken = async () => {
         const res = await fetch(`${URI}/refresh`, {
