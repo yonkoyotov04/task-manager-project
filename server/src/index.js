@@ -23,7 +23,7 @@ try {
 
 app.use(cors({
     origin: [
-        'https://task-manager-e.netlify.app',
+        'https://task-manager-project-phi.vercel.app',
         'http://localhost:2406'
     ],
     credentials: true,
