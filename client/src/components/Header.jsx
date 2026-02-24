@@ -21,18 +21,16 @@ export default function Header({ editUsernameSetter, editPasswordSetter }) {
                 const randomQuote = await fetcher('/quotes', 'GET', null, { accessToken: user?.accessToken });
 
                 setQuote(randomQuote);
+                setRendered(true);
                 setVisible(true);
 
-                if (visible) {
-                    setRendered(true);
-                    setTimeout(() => {
-                        setVisible(false);
-                    }, 10000)
-                } else {
-                    setTimeout(() => {
-                        setRendered(false)
-                    }, 1500)
-                }
+                setTimeout(() => {
+                    setVisible(false);
+                }, 10000)
+
+                setTimeout(() => {
+                    setRendered(false);
+                }, 11500)
             }
         }, 60000)
 
@@ -42,7 +40,7 @@ export default function Header({ editUsernameSetter, editPasswordSetter }) {
 
     return (
         <header>
-            <div className="quote" style={{ display: rendered ? "flex" : "none", opacity: visible ? '1' : '0'}}>{quote}</div>
+            <div className="quote" style={{ display: rendered ? "flex" : "none", opacity: visible ? '1' : '0' }}>{quote}</div>
             <div className="navi">
                 <span>{user?.username}</span>
                 <div className="settingsWrapper">
