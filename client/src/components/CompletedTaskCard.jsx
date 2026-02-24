@@ -4,6 +4,8 @@ export default function CompletedTaskCard({_id, title, completedAt, status, retu
 
     const {DeletePrompt, onDeleteClick} = useDelete('single', _id, tasks, taskSetter)
 
+    console.log(completedAt);
+
     completedAt = new Date(completedAt).toLocaleTimeString();
 
     return (

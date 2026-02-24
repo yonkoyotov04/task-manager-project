@@ -26,7 +26,7 @@ export default {
         }
 
         const date = new Date();
-        const shortDate = date.toLocaleString("en-GB", {
+        const shortDate = date.toISOString("en-GB", {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit',
