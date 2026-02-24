@@ -1,6 +1,5 @@
 import { createContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage.js";
-import { SERVER_URI } from "../config/constants.js";
 
 const UserContext = createContext({
     user: {},
@@ -19,7 +18,7 @@ export function UserProvider({children}) {
     }
 
     const onLogout = async () => {
-        await fetch(`${SERVER_URI}/logout`, {
+        await fetch(`${import.meta.env.API_URI}/logout`, {
             method: 'POST', credentials: 'include'})
         setUser(null);
     }

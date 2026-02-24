@@ -23,7 +23,7 @@ try {
 
 app.use(cors({
     origin: [
-        'https://task-manager-e.netlify.app/login',
+        'https://task-manager-e.netlify.app',
         'http://localhost:2406'
     ],
     credentials: true,

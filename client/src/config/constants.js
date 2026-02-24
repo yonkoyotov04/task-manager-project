@@ -1,1 +1,0 @@
-export const SERVER_URI = 'https://task-manager-project-j6nx.onrender.com'

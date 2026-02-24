@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react"
 import UserContext from "../contexts/UserContext.jsx"
 import { useNavigate } from "react-router";
 import ErrorContext from "../contexts/ErrorContext.jsx";
-import { SERVER_URI } from "../config/constants.js";
 
 const baseURL = 'http://localhost:2406';
 
@@ -18,7 +17,7 @@ export default function useFetch(url, setData) {
     }
 
     const refreshToken = async () => {
-        const res = await fetch(`${baseURL}/refresh`, {
+        const res = await fetch(`${import.meta.env.API_URI}/refresh`, {
             method: "POST",
             credentials: 'include'
         })
@@ -57,7 +56,7 @@ export default function useFetch(url, setData) {
 
         options.credentials = 'include';
 
-        let response = await fetch(`${baseURL}${url}`, options);
+        let response = await fetch(`${import.meta.env.API_URI}${url}`, options);
 
         if (!response.ok) {
             if (response.status === 401) {
@@ -74,7 +73,7 @@ export default function useFetch(url, setData) {
                     'X-Authorization': refreshed
                 }
 
-                response = await fetch(`${baseURL}${url}`, options);
+                response = await fetch(`${import.meta.env.API_URI}${url}`, options);
             } else {
                 errorSetter(response.statusText);
                 throw response.statusText;
