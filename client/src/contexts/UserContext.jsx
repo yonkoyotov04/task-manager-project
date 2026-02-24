@@ -18,7 +18,7 @@ export function UserProvider({children}) {
     }
 
     const onLogout = async () => {
-        await fetch(`${import.meta.env.API_URI}/logout`, {
+        await fetch(`${import.meta.env.VITE_API_URI}/logout`, {
             method: 'POST', credentials: 'include'})
         setUser(null);
     }
