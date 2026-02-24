@@ -42,7 +42,7 @@ export default {
     },
 
     deleteAllCompletedTasks(userId) {
-        return Task.deleteMany({ user: userId, status: 'completed' });
+        return Task.deleteMany({ user: userId, status: { $in: ['completed', 'completed-expired'] } });
     },
 
     returnTask(taskId) {

@@ -25,7 +25,7 @@ export default function useDelete(type, id, data, setData) {
             }
             case 'all': {
                 fetcher('/tasks', "DELETE", null, {accessToken: user?.accessToken});
-                setData(data => data.filter(item => item.status === 'active'));
+                setData(data => data.filter(item => item.status === 'active' || item.status === 'expired'));
                 setShowDeletePrompt(false);
                 break;
             }
