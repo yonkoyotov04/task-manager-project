@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 2406;
 
 const app = express();
 // 'mongodb://localhost:27017/'
+// process.env.MONGO_URI
 
 try {
     await mongoose.connect(process.env.MONGO_URI, {
@@ -24,7 +25,7 @@ try {
 app.use(cors({
     origin: [
         'https://task-manager-project-phi.vercel.app',
-        'http://localhost:2406'
+        'http://localhost:5173'
     ],
     credentials: true,
 }));

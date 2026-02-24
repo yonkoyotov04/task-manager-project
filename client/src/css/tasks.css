@@ -71,11 +71,15 @@
 .task-info {
     display: flex;
     flex-direction: column;
+    max-width: 185px;
     gap: 4px;
 }
 
 .task-info .name {
+    display: inline-block;
     font-weight: 500;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 .task-info .deadline {

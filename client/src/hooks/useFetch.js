@@ -14,8 +14,11 @@ export default function useFetch(url, setData) {
         setRefresh(state => !state);
     }
 
+    const URI = import.meta.env.VITE_API_URI;
+    // 'http://localhost:2406'
+
     const refreshToken = async () => {
-        const res = await fetch(`${import.meta.env.VITE_API_URI}/refresh`, {
+        const res = await fetch(`${URI}/refresh`, {
             method: "POST",
             credentials: 'include'
         })
@@ -54,7 +57,7 @@ export default function useFetch(url, setData) {
 
         options.credentials = 'include';
 
-        let response = await fetch(`${import.meta.env.VITE_API_URI}${url}`, options);
+        let response = await fetch(`${URI}${url}`, options);
 
         if (!response.ok) {
             if (response.status === 401) {
@@ -71,7 +74,7 @@ export default function useFetch(url, setData) {
                     'X-Authorization': refreshed
                 }
 
-                response = await fetch(`${import.meta.env.VITE_API_URI}${url}`, options);
+                response = await fetch(`${URI}${url}`, options);
             } else {
                 errorSetter(response.statusText);
                 throw response.statusText;
