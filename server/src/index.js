@@ -13,7 +13,7 @@ const app = express();
 // 'mongodb://localhost:27017/'
 
 try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(process.env.MONGO_URI, {
         dbName: 'task-manager-project'
     })
     console.log("Successfully connected to database!")
