@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { JWT_SECRET, REFRESH_JWT_SECRET } from '../config/constants.js';
+import 'dotenv/config'
 
 export function generateAuthToken(user) {
     const payload = {
@@ -7,7 +7,7 @@ export function generateAuthToken(user) {
         email: user.email,
     }
 
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '15m' })
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' })
 
     return token;
 }
@@ -18,7 +18,7 @@ export function generateRefreshToken(user) {
         email: user.email
     }
 
-    const refreshToken = jwt.sign(payload, REFRESH_JWT_SECRET, { expiresIn: '14d' })
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_JWT_SECRET, { expiresIn: '14d' })
 
     return refreshToken;
 }

@@ -6,15 +6,14 @@ import routes from './routes.js';
 import cookieParser from 'cookie-parser'
 import 'dotenv/config'
 
-const database_uri = process.env.MONGODB_URI;
 const uri = process.env.SERVER_URI;
-const PORT = process.env.PORT || '2406';
+const PORT = process.env.PORT || 2406;
 
 const app = express();
 // 'mongodb://localhost:27017/'
 
 try {
-    await mongoose.connect(database_uri, {
+    await mongoose.connect(process.env.MONGODB_URI, {
         dbName: 'task-manager-project'
     })
     console.log("Successfully connected to database!")
@@ -23,7 +22,7 @@ try {
 }
 
 app.use(cors({
-    origin: 'https://task-manager-e.netlify.app/',
+    origin: true,
     credentials: true,
 }));
 
@@ -33,4 +32,4 @@ app.use(cookieParser());
 app.use(authMiddleware);
 app.use(routes);
 
-app.listen(PORT, "0.0.0.0", () => {console.log(`The server is listening on port ${PORT}.....`)})
+app.listen(PORT, () => {console.log(`The server is listening on port ${PORT}.....`)})

@@ -3,7 +3,7 @@ import { isAuth, isGuest } from "../middlewares/authMiddleware.js";
 import userService from "../services/userService.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
 import jwt from 'jsonwebtoken';
-import { REFRESH_JWT_SECRET } from "../config/constants.js";
+import 'dotenv/config'
 import { generateAuthToken } from "../utils/tokenUtils.js";
 
 const userController = Router();
@@ -69,7 +69,7 @@ userController.post('/refresh', async (req, res) => {
         return res.sendStatus(401);
     }
 
-    const decodedToken = jwt.verify(token, REFRESH_JWT_SECRET)
+    const decodedToken = jwt.verify(token, process.env.REFRESH_JWT_SECRET)
     const newAccessToken = generateAuthToken(decodedToken);
     
     res.status(201).json(newAccessToken);

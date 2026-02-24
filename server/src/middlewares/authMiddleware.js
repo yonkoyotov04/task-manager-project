@@ -1,4 +1,4 @@
-import {JWT_SECRET} from "../config/constants.js";
+import 'dotenv/config'
 import jwt from 'jsonwebtoken'
 
 export default function authMiddleware(req, res, next) {
@@ -9,7 +9,7 @@ export default function authMiddleware(req, res, next) {
     }
 
     try {
-        const decodedToken = jwt.verify(token, JWT_SECRET);
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
         req.user = decodedToken;
         req.isAuthenticated = true;
